@@ -13,6 +13,7 @@ public class Controller {
         String name = username.getText();
         String password = pass.getText();
         Database db = Database.getInstance();
-        db.compareEmployee(name,password);
+        Employee person = db.compareEmployee(name,password);
+        System.out.println(person.getFirstname());
     }
 }

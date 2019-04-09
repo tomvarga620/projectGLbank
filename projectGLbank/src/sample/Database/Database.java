@@ -38,40 +38,30 @@ public class Database {
 
 
     public Employee compareEmployee(String name, String pass){
-        Employee person;
+
+        Connection conn = getConnection();
+        PreparedStatement pst = null;
+        ResultSet rs;
+
         try {
 
-            Connection conn = getConnection();
-
-            PreparedStatement pst = null;
-            ResultSet rs = null;
-            pst = conn.prepareStatement("select * from loginEmp");
+            pst = conn.prepareStatement("SELECT * FROM Employee INNER JOIN loginEmp ON Employee.id = loginEmp.ide WHERE login LIKE ? and password LIKE ?" );
+            pst.setString(1,name);
+            pst.setString(2,pass);
             rs = pst.executeQuery();
+            while (rs.next()) {
+                System.out.println("It works");
+                //System.out.println(rs.getString("fname"));
 
-            while(rs.next()){
-               // System.out.println(rs.getString("login"));
-                String tempname = rs.getString("login");
-                String tempass = rs.getString("password");
-                if(tempname.equals(name) && tempass.equals(pass)){
-                    System.out.println("it works");
-                }
-                else
-                {
-                    System.out.println("bad login");
-                    return null;
-                }
+                Employee person = new Employee(rs.getString("fname"), rs.getString("lname"),
+                        rs.getInt("position"), rs.getInt("id"));
+                return person;
             }
-
-
-           /* while (rs.next()) {
-                person = new Employee(rs.getString(),);
-            }*/
-
+            conn.close();
 
         }catch (SQLException e){
             e.printStackTrace();
         }
-        //return person;
         return null;
     }
 
