@@ -1,12 +1,5 @@
 package sample;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import static sample.Database.Database.getConnection;
-
 public class Employee {
 
     private String Firstname;
