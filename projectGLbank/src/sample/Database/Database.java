@@ -65,4 +65,18 @@ public class Database {
         return null;
     }
 
+    public String getPosition(Employee emp){
+        int position = emp.getPosition();
+        String boss = "boss";
+        String common = "common";
+
+        if (position == 1) {
+            return common;
+        }
+        else
+        {
+            return boss;
+        }
+    }
+
 }
