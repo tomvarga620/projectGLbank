@@ -36,11 +36,26 @@ public class Controller {
             Stage stage = (Stage) button.getScene().getWindow();
             stage.close();
 
-            AfterLog after = new AfterLog();
-            after.setupAfterlog(person.getFirstname(),person.getSurname(),position);
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("afterLog.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                Stage stage2 = new Stage();
+                stage2.setTitle("After log");
+                stage2.setScene(new Scene(root1));
+
+                AfterLog acc;
+                acc = fxmlLoader.getController();
+                acc.setupAfterlog(person,position);
+
+                stage2.show();
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         if(person == null){
-
+            System.out.println("bad login");
         }
 
     }
