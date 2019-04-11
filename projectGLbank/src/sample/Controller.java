@@ -49,7 +49,6 @@ public class Controller {
 
                 stage2.show();
 
-
             } catch (IOException e) {
                 e.printStackTrace();
             }

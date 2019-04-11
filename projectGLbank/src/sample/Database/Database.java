@@ -1,9 +1,12 @@
 package sample.Database;
 
+import sample.Client;
 import sample.Employee;
 import sample.Globals;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Database {
 
@@ -77,6 +80,30 @@ public class Database {
         {
             return boss;
         }
+    }
+
+    public List <Client> selectClients(){
+        Connection conn = getConnection();
+        //String query = "SELECT * FROM persons WHERE dnar <= Current_date() - 18 ";
+        String query = "SELECT * FROM Client";
+        List <Client> clients = new ArrayList<>();
+
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            pst = conn.prepareStatement(query);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+
+                Client client = new Client(rs.getString("fname"),rs.getString("lname"));
+                clients.add(client);
+            }
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return clients;
     }
 
 }
