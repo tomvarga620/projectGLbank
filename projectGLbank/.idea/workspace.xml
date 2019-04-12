@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/sk/itsovy/projectGLbank/Globals.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sk/itsovy/projectGLbank/Globals.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sk/itsovy/projectGLbank/afterLogWindow/AfterLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sk/itsovy/projectGLbank/afterLogWindow/AfterLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sk/itsovy/projectGLbank/afterLogWindow/afterLog.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sk/itsovy/projectGLbank/afterLogWindow/afterLog.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sk/itsovy/projectGLbank/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sk/itsovy/projectGLbank/database/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sk/itsovy/projectGLbank/loginWindow/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sk/itsovy/projectGLbank/loginWindow/Controller.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -87,8 +84,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sk/itsovy/projectGLbank/database/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="115" column="6" selection-start-line="115" selection-start-column="6" selection-end-line="115" selection-end-column="6" />
+            <state relative-caret-position="303">
+              <caret line="134" lean-forward="true" selection-start-line="134" selection-end-line="134" />
             </state>
           </provider>
         </entry>
@@ -96,8 +93,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sk/itsovy/projectGLbank/afterLogWindow/AfterLog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
-              <caret line="54" column="35" lean-forward="true" selection-start-line="54" selection-start-column="35" selection-end-line="54" selection-end-column="35" />
+            <state relative-caret-position="243">
+              <caret line="47" column="32" lean-forward="true" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -479,16 +476,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sk/itsovy/projectGLbank/afterLogWindow/AfterLog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="54" column="35" lean-forward="true" selection-start-line="54" selection-start-column="35" selection-end-line="54" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sk/itsovy/projectGLbank/loginWindow/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="471">
@@ -496,10 +483,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/sk/itsovy/projectGLbank/afterLogWindow/AfterLog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="47" column="32" lean-forward="true" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/sk/itsovy/projectGLbank/database/Database.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="115" column="6" selection-start-line="115" selection-start-column="6" selection-end-line="115" selection-end-column="6" />
+        <state relative-caret-position="303">
+          <caret line="134" lean-forward="true" selection-start-line="134" selection-end-line="134" />
         </state>
       </provider>
     </entry>

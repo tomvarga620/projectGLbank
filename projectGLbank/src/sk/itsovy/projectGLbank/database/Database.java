@@ -8,6 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Database {
 
@@ -114,5 +115,27 @@ public class Database {
 
         return strings;
     }*/
+
+      /*  public List <String> listToString(List <Client> list){
+            List<String> strings = list.stream()
+                    .map(object -> Objects.toString(object, null))
+                    .collect(Collectors.toList());
+
+        return strings;
+    }*/
+
+       public List <String> listToString(List <Client> list){
+           /* List<String> strings = list.stream()
+                    .map(object -> Objects.toString(object, null))
+                    .collect(Collectors.toList());*/
+
+        //return strings;
+
+           List<String> namesList = list.stream().map(p -> p.getFirstName()).collect(Collectors.toList());
+
+           return namesList;
+
+       }
+
 
 }

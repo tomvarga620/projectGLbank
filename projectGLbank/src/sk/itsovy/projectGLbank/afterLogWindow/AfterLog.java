@@ -42,12 +42,11 @@ public class AfterLog implements Initializable {
     }
 
     @FXML
-    /*ComboBox<String> combobox;
+    ComboBox<String> combobox;
     ObservableList<String> list = FXCollections.observableList(Globals.db.listToString(Globals.db.selectClients()));
-    */
 
-    ComboBox<Client> combobox;
-    ObservableList<Client> list = FXCollections.observableList(Globals.db.selectClients());
+    /*ComboBox<Client> combobox;
+    ObservableList<Client> list = FXCollections.observableList(Globals.db.selectClients());*/
 
 
     @Override
