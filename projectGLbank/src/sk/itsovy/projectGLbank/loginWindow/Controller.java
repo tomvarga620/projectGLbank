@@ -52,6 +52,8 @@ public class Controller {
         }
         if(person == null){
             System.out.println("bad login");
+            username.setText("");
+            pass.setText("");
         }
 
     }
