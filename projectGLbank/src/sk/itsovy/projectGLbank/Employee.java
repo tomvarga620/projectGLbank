@@ -1,4 +1,4 @@
-package sample;
+package sk.itsovy.projectGLbank;
 
 public class Employee {
 

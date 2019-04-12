@@ -1,4 +1,4 @@
-package sample;
+package sk.itsovy.projectGLbank;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

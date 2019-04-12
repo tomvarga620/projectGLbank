@@ -1,8 +1,8 @@
-package sample.Database;
+package sk.itsovy.projectGLbank.database;
 
-import sample.Client;
-import sample.Employee;
-import sample.Globals;
+import sk.itsovy.projectGLbank.Client;
+import sk.itsovy.projectGLbank.Employee;
+import sk.itsovy.projectGLbank.Globals;
 
 import java.sql.*;
 import java.util.ArrayList;

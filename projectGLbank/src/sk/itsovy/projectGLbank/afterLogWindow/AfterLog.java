@@ -1,13 +1,7 @@
-package sample;
+package sk.itsovy.projectGLbank.afterLogWindow;
 
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
-import java.io.IOException;
+import sk.itsovy.projectGLbank.Employee;
 
 public class AfterLog {
 
@@ -15,7 +9,7 @@ public class AfterLog {
     public Label afterLogSurname;
     public Label afterLogPosition;
 
-    public void setupAfterlog(Employee person,String position) {
+    public void setupAfterlog(Employee person, String position) {
 
         String name = person.getFirstname();
         String surname = person.getSurname();
