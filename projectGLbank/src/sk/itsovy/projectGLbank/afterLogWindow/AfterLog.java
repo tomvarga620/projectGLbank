@@ -1,13 +1,21 @@
 package sk.itsovy.projectGLbank.afterLogWindow;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import sk.itsovy.projectGLbank.Employee;
 
-public class AfterLog {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AfterLog implements Initializable {
 
     public Label afterLogName;
     public Label afterLogSurname;
     public Label afterLogPosition;
+    public Button logout;
 
     public void setupAfterlog(Employee person, String position) {
 
@@ -22,4 +30,13 @@ public class AfterLog {
 
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("test");
+    }
+
+    public void logoutbtn(ActionEvent actionEvent) {
+        Stage stage = (Stage) logout.getScene().getWindow();
+        stage.close();
+    }
 }
