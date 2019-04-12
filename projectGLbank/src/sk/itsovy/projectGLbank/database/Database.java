@@ -7,9 +7,9 @@ import sk.itsovy.projectGLbank.Globals;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Database {
-
 
     private static Database db = new Database();
 
@@ -105,5 +105,14 @@ public class Database {
 
         return clients;
     }
+
+    /*public List <String> listToString(List <Client> list){
+        List<String> strings = new ArrayList<>(list.size());
+        for (Object object : list) {
+            strings.add(Objects.toString(object, null));
+        }
+
+        return strings;
+    }*/
 
 }

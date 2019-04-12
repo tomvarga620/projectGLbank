@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sk.itsovy.projectGLbank.Employee;
+import sk.itsovy.projectGLbank.Globals;
 import sk.itsovy.projectGLbank.database.Database;
 import sk.itsovy.projectGLbank.afterLogWindow.AfterLog;
 
@@ -22,14 +23,13 @@ public class Controller {
     public void login(ActionEvent actionEvent) {
         String name = username.getText();
         String password = pass.getText();
-        Database db = Database.getInstance();
-        Employee person = db.compareEmployee(name,password);
+        Employee person = Globals.db.compareEmployee(name,password);
 
         //TODO metoda pre validaciu
         if(person != null){
             System.out.println(person.getFirstname());
             System.out.println(person.getPosition());
-            String position = db.getPosition(person);
+            String position = Globals.db.getPosition(person);
             Stage stage = (Stage) button.getScene().getWindow();
             stage.close();
 
