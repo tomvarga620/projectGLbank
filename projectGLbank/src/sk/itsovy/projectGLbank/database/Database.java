@@ -83,28 +83,30 @@ public class Database {
         }
     }
 
-    public List <Client> selectClients(){
+    public ArrayList<Client> selectClients(){
         Connection conn = getConnection();
         //String query = "SELECT * FROM persons WHERE dnar <= Current_date() - 18 ";
         String query = "SELECT * FROM Client";
-        List <Client> clients = new ArrayList<>();
+        ArrayList <Client> clientList = new ArrayList<>();
 
         try {
             PreparedStatement pst = null;
             ResultSet rs = null;
             pst = conn.prepareStatement(query);
             rs = pst.executeQuery();
+
             while (rs.next()) {
 
-                Client client = new Client(rs.getString("fname"),rs.getString("lname"));
-                clients.add(client);
+                Client client = new Client(rs.getString("fname"),rs.getString("lname"),rs.getInt("id"));
+                clientList.add(client);
             }
+            return clientList;
 
         }catch(SQLException e){
             e.printStackTrace();
         }
+        return null;
 
-        return clients;
     }
 
     /*public List <String> listToString(List <Client> list){
@@ -124,10 +126,10 @@ public class Database {
         return strings;
     }*/
 
-       public List <String> listToString(List <Client> list){
-           /* List<String> strings = list.stream()
+     /*  public List <String> listToString(List <Client> list){
+            List<String> strings = list.stream()
                     .map(object -> Objects.toString(object, null))
-                    .collect(Collectors.toList());*/
+                    .collect(Collectors.toList());
 
         //return strings;
 
@@ -135,7 +137,7 @@ public class Database {
 
            return namesList;
 
-       }
+       }*/
 
 
 }

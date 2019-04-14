@@ -14,6 +14,7 @@ import sk.itsovy.projectGLbank.Employee;
 import sk.itsovy.projectGLbank.Globals;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
@@ -43,16 +44,23 @@ public class AfterLog implements Initializable {
 
     @FXML
     ComboBox<String> combobox;
-    ObservableList<String> list = FXCollections.observableList(Globals.db.listToString(Globals.db.selectClients()));
-
-    /*ComboBox<Client> combobox;
-    ObservableList<Client> list = FXCollections.observableList(Globals.db.selectClients());*/
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("test");
-        combobox.setItems(list);
+        fillDropdown();
+    }
+
+    public void fillDropdown(){
+        ArrayList<Client> clientList = Globals.db.selectClients();
+        ObservableList<String> oblist = FXCollections.observableArrayList();
+
+        for(int i=0; i<clientList.size();i++){
+            oblist.add(clientList.get(i).getFirstName()+" "+clientList.get(i).getLastName());
+        }
+
+        combobox.setItems(oblist);
     }
 
 }

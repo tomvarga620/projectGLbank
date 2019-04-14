@@ -4,11 +4,12 @@ public class Client {
 
     private String FirstName;
     private String LastName;
+    private int id;
 
-
-    public Client(String firstName, String lastName) {
+    public Client(String firstName, String lastName, int id) {
         FirstName = firstName;
         LastName = lastName;
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -25,5 +26,13 @@ public class Client {
 
     public void setLastName(String lastName) {
         LastName = lastName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
