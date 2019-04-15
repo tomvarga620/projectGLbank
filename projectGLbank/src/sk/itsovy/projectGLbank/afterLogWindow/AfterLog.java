@@ -25,6 +25,13 @@ public class AfterLog implements Initializable {
     public Label afterLogPosition;
     public Button logout;
 
+    //client fill
+    public Label clientName;
+    public Label clientSurname;
+    public Label clientMail;
+
+    ArrayList<Client> clientList;
+
     public void setupAfterlog(Employee person, String position) {
 
         String name = person.getFirstname();
@@ -43,8 +50,7 @@ public class AfterLog implements Initializable {
     }
 
     @FXML
-    ComboBox<String> combobox;
-
+    ComboBox combobox;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -53,14 +59,17 @@ public class AfterLog implements Initializable {
     }
 
     public void fillDropdown(){
-        ArrayList<Client> clientList = Globals.db.selectClients();
+        clientList = Globals.db.selectClientsToList();
         ObservableList<String> oblist = FXCollections.observableArrayList();
 
-        for(int i=0; i<clientList.size();i++){
-            oblist.add(clientList.get(i).getFirstName()+" "+clientList.get(i).getLastName());
+        for(int i=0; i<clientList.size();i++) {
+            oblist.add(clientList.get(i).getFirstName() + " " + clientList.get(i).getLastName());
         }
 
         combobox.setItems(oblist);
     }
-
+    //TODO metoda ktora mi vrati id z comboxu
+    public void clientFill(ActionEvent actionEvent) {
+       clientName.setText(combobox.getValue().toString());
+    }
 }

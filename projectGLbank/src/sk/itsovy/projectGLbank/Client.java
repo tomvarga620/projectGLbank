@@ -4,11 +4,14 @@ public class Client {
 
     private String FirstName;
     private String LastName;
+    private String email;
     private int id;
 
-    public Client(String firstName, String lastName, int id) {
+
+    public Client(String firstName, String lastName, String email, int id) {
         FirstName = firstName;
         LastName = lastName;
+        this.email = email;
         this.id = id;
     }
 
@@ -26,6 +29,14 @@ public class Client {
 
     public void setLastName(String lastName) {
         LastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getId() {

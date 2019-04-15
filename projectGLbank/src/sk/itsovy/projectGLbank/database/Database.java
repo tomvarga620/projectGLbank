@@ -1,5 +1,6 @@
 package sk.itsovy.projectGLbank.database;
 
+import sk.itsovy.projectGLbank.Account;
 import sk.itsovy.projectGLbank.Client;
 import sk.itsovy.projectGLbank.Employee;
 import sk.itsovy.projectGLbank.Globals;
@@ -83,7 +84,7 @@ public class Database {
         }
     }
 
-    public ArrayList<Client> selectClients(){
+    public ArrayList<Client> selectClientsToList(){
         Connection conn = getConnection();
         //String query = "SELECT * FROM persons WHERE dnar <= Current_date() - 18 ";
         String query = "SELECT * FROM Client";
@@ -97,7 +98,7 @@ public class Database {
 
             while (rs.next()) {
 
-                Client client = new Client(rs.getString("fname"),rs.getString("lname"),rs.getInt("id"));
+                Client client = new Client(rs.getString("fname"),rs.getString("lname"),rs.getString("email"),rs.getInt("ID"));
                 clientList.add(client);
             }
             return clientList;
@@ -107,6 +108,34 @@ public class Database {
         }
         return null;
 
+    }
+
+
+    public Account selectAccounts(Client id){
+        Connection conn = getConnection();
+        Account acc = null;
+        //String query = "SELECT * FROM persons WHERE dnar <= Current_date() - 18 ";
+        String query = "SELECT * FROM Account where IDClient like ? ";
+
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            pst = conn.prepareStatement(query);
+            pst.setString(1,String.valueOf(id));
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+
+                acc = new Account(rs.getInt("ID"),rs.getString("AccName"),rs.getInt("money"),
+                rs.getInt("IDClient"));
+            }
+            return acc;
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     /*public List <String> listToString(List <Client> list){

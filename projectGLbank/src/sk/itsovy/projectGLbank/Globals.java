@@ -15,5 +15,4 @@ public class Globals {
     public static final String url = "jdbc:mysql://localhost:3306/glbank";
     public static final Database db = Database.getInstance();
 
-
 }
