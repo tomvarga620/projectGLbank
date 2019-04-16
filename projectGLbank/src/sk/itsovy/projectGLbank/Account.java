@@ -3,14 +3,14 @@ package sk.itsovy.projectGLbank;
 public class Account {
 
     private int IDacc;
-    private String AccName;
-    private int money;
+    private String AccNum;
+    private double money;
     private int IDc;
 
 
-    public Account(int IDacc, String accName, int money, int IDc) {
+    public Account(int IDacc, String accName, double money, int IDc) {
         this.IDacc = IDacc;
-        this.AccName = accName;
+        this.AccNum = accName;
         this.money = money;
         this.IDc = IDc;
     }
@@ -23,19 +23,19 @@ public class Account {
         this.IDacc = IDacc;
     }
 
-    public String getAccName() {
-        return AccName;
+    public String getAccNum() {
+        return AccNum;
     }
 
-    public void setAccName(String accName) {
-        AccName = accName;
+    public void setAccNum(String accNum) {
+        AccNum = accNum;
     }
 
     public double getMoney() {
         return money;
     }
 
-    public void setMoney(int money) {
+    public void setMoney(double money) {
         this.money = money;
     }
 

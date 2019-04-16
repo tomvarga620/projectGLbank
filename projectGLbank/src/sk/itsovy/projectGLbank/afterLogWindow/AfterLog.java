@@ -9,15 +9,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import sk.itsovy.projectGLbank.Account;
 import sk.itsovy.projectGLbank.Client;
 import sk.itsovy.projectGLbank.Employee;
 import sk.itsovy.projectGLbank.Globals;
-import sk.itsovy.projectGLbank.database.Database;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Observable;
 import java.util.ResourceBundle;
 
 public class AfterLog implements Initializable {
@@ -33,6 +32,7 @@ public class AfterLog implements Initializable {
     public Label clientMail;
 
     ArrayList<Client> clientList;
+    ArrayList<Account> accList;
 
     public void setupAfterlog(Employee person, String position) {
 
@@ -53,11 +53,13 @@ public class AfterLog implements Initializable {
 
     @FXML
     ComboBox combobox;
+    ComboBox comboboxAcc;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("test");
         fillDropdown();
+       // Globals.db.selectAccountsToList(2); select ide
     }
 
     public void fillDropdown(){
@@ -69,6 +71,21 @@ public class AfterLog implements Initializable {
         }
 
         combobox.setItems(oblist);
+        System.out.println(combobox.getItems().size());
+    }
+
+
+    public void fillDropdown2(){
+        int clientID = getIDClient()+1;
+        //accList = Globals.db.selectAccountsToList(clientList.get(getIDClient()).getId());
+        accList = Globals.db.selectAccountsToList(getIDClient());
+        ObservableList<String> oblist = FXCollections.observableArrayList();
+
+        for(int i=0; i<accList.size();i++) {
+            oblist.add(accList.get(i).getIDacc() + " " + accList.get(i).getAccNum());
+        }
+
+        comboboxAcc.setItems(oblist);
     }
 
     /*
@@ -78,17 +95,26 @@ public class AfterLog implements Initializable {
 
     public void clientInfo() throws SQLException {
 
-        Client selectedUser=Globals.db.selectClientInfo(clientList.get(getIDofSelected()).getId());
-        System.out.println(selectedUser);
+        Client selectedUser=Globals.db.selectClientInfo(clientList.get(getIDClient()).getId());
+
+       // System.out.println(selectedUser);
+
         clientName.setText(selectedUser.getFirstName());
         clientSurname.setText(selectedUser.getLastName());
         clientMail.setText(String.valueOf(selectedUser.getEmail()));
-        fillDropdown();
+
+        fillDropdown2();
+
     }
 
-    public int getIDofSelected() {
-        System.out.println(combobox.getSelectionModel().getSelectedIndex());
+    public int getIDClient() {
+        //System.out.println(combobox.getSelectionModel().getSelectedIndex());
         return combobox.getSelectionModel().getSelectedIndex();
     }
+
+    /*public int getIDAccount() {
+       // System.out.println(combobox.getSelectionModel().getSelectedIndex());
+        return combobox.getSelectionModel().getSelectedIndex();
+    }*/
 
 }

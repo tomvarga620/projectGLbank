@@ -110,6 +110,32 @@ public class Database {
 
     }
 
+    public ArrayList<Account> selectAccountsToList(int id) {
+
+        Connection conn = getConnection();
+
+        ArrayList <Account> accounts = new ArrayList<>();
+        try {
+
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            pst = conn.prepareStatement("SELECT * FROM Account where IDClient like ? ");
+            pst.setString(1,String.valueOf(id));
+            rs = pst.executeQuery();
+            while (rs.next()) {
+
+               Account acc = new Account(rs.getInt("ID"),rs.getString("AccNum"),
+                        rs.getDouble("money"),rs.getInt("IDClient"));
+                System.out.println(acc.getAccNum());
+                accounts.add(acc);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return accounts;
+    }
+
 
     public Client selectClientInfo(int id){
         Connection conn = getConnection();
@@ -137,36 +163,6 @@ public class Database {
 
         return null;
     }
-
-    /*public List <String> listToString(List <Client> list){
-        List<String> strings = new ArrayList<>(list.size());
-        for (Object object : list) {
-            strings.add(Objects.toString(object, null));
-        }
-
-        return strings;
-    }*/
-
-      /*  public List <String> listToString(List <Client> list){
-            List<String> strings = list.stream()
-                    .map(object -> Objects.toString(object, null))
-                    .collect(Collectors.toList());
-
-        return strings;
-    }*/
-
-     /*  public List <String> listToString(List <Client> list){
-            List<String> strings = list.stream()
-                    .map(object -> Objects.toString(object, null))
-                    .collect(Collectors.toList());
-
-        //return strings;
-
-           List<String> namesList = list.stream().map(p -> p.getFirstName()).collect(Collectors.toList());
-
-           return namesList;
-
-       }*/
 
 
 }
