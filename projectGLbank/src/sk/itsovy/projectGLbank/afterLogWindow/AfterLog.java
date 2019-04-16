@@ -53,13 +53,18 @@ public class AfterLog implements Initializable {
 
     @FXML
     ComboBox combobox;
-    ComboBox comboboxAcc;
+    ComboBox combobox2;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("test");
         fillDropdown();
        // Globals.db.selectAccountsToList(2); select ide
+        /*accList = Globals.db.selectAccountsToList(1);
+        for(int i=0; i<accList.size();i++) {
+            System.out.println(accList.get(i).getAccNum());
+        }*/
+
     }
 
     public void fillDropdown(){
@@ -71,21 +76,20 @@ public class AfterLog implements Initializable {
         }
 
         combobox.setItems(oblist);
-        System.out.println(combobox.getItems().size());
+        //System.out.println(combobox.getItems().size());
     }
 
 
     public void fillDropdown2(){
-        int clientID = getIDClient()+1;
-        //accList = Globals.db.selectAccountsToList(clientList.get(getIDClient()).getId());
-        accList = Globals.db.selectAccountsToList(getIDClient());
+
+        accList = Globals.db.selectAccountsToList(clientList.get(getIDClient()).getId());
         ObservableList<String> oblist = FXCollections.observableArrayList();
 
         for(int i=0; i<accList.size();i++) {
             oblist.add(accList.get(i).getIDacc() + " " + accList.get(i).getAccNum());
         }
 
-        comboboxAcc.setItems(oblist);
+        combobox2.setItems(oblist);
     }
 
     /*
@@ -108,7 +112,7 @@ public class AfterLog implements Initializable {
     }
 
     public int getIDClient() {
-        //System.out.println(combobox.getSelectionModel().getSelectedIndex());
+        //System.out.println(combobox.getSelectionmModel().getSelectedIndex());
         return combobox.getSelectionModel().getSelectedIndex();
     }
 
