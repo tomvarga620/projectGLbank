@@ -12,8 +12,10 @@ import javafx.stage.Stage;
 import sk.itsovy.projectGLbank.Client;
 import sk.itsovy.projectGLbank.Employee;
 import sk.itsovy.projectGLbank.Globals;
+import sk.itsovy.projectGLbank.database.Database;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.ResourceBundle;
@@ -68,8 +70,25 @@ public class AfterLog implements Initializable {
 
         combobox.setItems(oblist);
     }
-    //TODO metoda ktora mi vrati id z comboxu
+
+    /*
     public void clientFill(ActionEvent actionEvent) {
        clientName.setText(combobox.getValue().toString());
+    }*/
+
+    public void clientInfo() throws SQLException {
+
+        Client selectedUser=Globals.db.selectClientInfo(clientList.get(getIDofSelected()).getId());
+        System.out.println(selectedUser);
+        clientName.setText(selectedUser.getFirstName());
+        clientSurname.setText(selectedUser.getLastName());
+        clientMail.setText(String.valueOf(selectedUser.getEmail()));
+        fillDropdown();
     }
+
+    public int getIDofSelected() {
+        System.out.println(combobox.getSelectionModel().getSelectedIndex());
+        return combobox.getSelectionModel().getSelectedIndex();
+    }
+
 }

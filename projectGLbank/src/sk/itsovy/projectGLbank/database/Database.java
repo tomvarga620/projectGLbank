@@ -111,11 +111,10 @@ public class Database {
     }
 
 
-    public Account selectAccounts(Client id){
+    public Client selectClientInfo(int id){
         Connection conn = getConnection();
-        Account acc = null;
-        //String query = "SELECT * FROM persons WHERE dnar <= Current_date() - 18 ";
-        String query = "SELECT * FROM Account where IDClient like ? ";
+        Client client = null;
+        String query = "SELECT * FROM Client where ID like ? ";
 
         try {
             PreparedStatement pst = null;
@@ -126,10 +125,11 @@ public class Database {
 
             while (rs.next()) {
 
-                acc = new Account(rs.getInt("ID"),rs.getString("AccName"),rs.getInt("money"),
-                rs.getInt("IDClient"));
+                client = new Client(rs.getString("fname"),rs.getString("lname"),rs.getString("email"),
+                rs.getInt("ID"));
+
             }
-            return acc;
+            return client;
 
         }catch(SQLException e){
             e.printStackTrace();

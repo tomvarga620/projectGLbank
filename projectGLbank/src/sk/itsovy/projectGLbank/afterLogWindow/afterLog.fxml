@@ -14,7 +14,7 @@
       <Pane prefHeight="400.0" prefWidth="600.0">
          <children>
             <Button fx:id="logout" layoutX="524.0" layoutY="11.0" mnemonicParsing="false" onAction="#logoutbtn" text="Logout" />
-            <ComboBox fx:id="combobox" layoutX="30.0" layoutY="83.0" onAction="#clientFill" prefWidth="150.0" promptText="Select client" />
+            <ComboBox fx:id="combobox" layoutX="30.0" layoutY="83.0" onAction="#clientInfo" prefWidth="150.0" promptText="Select client" />
             <TabPane layoutX="30.0" layoutY="130.0" prefHeight="200.0" prefWidth="550.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab fx:id="client" text="Client">
