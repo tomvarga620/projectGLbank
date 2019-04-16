@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.stage.Stage;
 import sk.itsovy.projectGLbank.Account;
 import sk.itsovy.projectGLbank.Client;
@@ -33,7 +34,7 @@ public class AfterLog implements Initializable {
 
     ArrayList<Client> clientList;
     ArrayList<Account> accList;
-
+//ok
     public void setupAfterlog(Employee person, String position) {
 
         String name = person.getFirstname();
@@ -53,18 +54,14 @@ public class AfterLog implements Initializable {
 
     @FXML
     ComboBox combobox;
-    ComboBox combobox2;
+    @FXML
+    ComboBox comboboxAcc;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("test");
         fillDropdown();
        // Globals.db.selectAccountsToList(2); select ide
-        /*accList = Globals.db.selectAccountsToList(1);
-        for(int i=0; i<accList.size();i++) {
-            System.out.println(accList.get(i).getAccNum());
-        }*/
-
     }
 
     public void fillDropdown(){
@@ -76,20 +73,20 @@ public class AfterLog implements Initializable {
         }
 
         combobox.setItems(oblist);
-        //System.out.println(combobox.getItems().size());
+        System.out.println(combobox.getItems().size());
     }
 
 
     public void fillDropdown2(){
-
-        accList = Globals.db.selectAccountsToList(clientList.get(getIDClient()).getId());
+        //accList = Globals.db.selectAccountsToList(clientList.get(getIDClient()).getId());
+        accList = Globals.db.selectAccountsToList(getIDClient());
         ObservableList<String> oblist = FXCollections.observableArrayList();
 
         for(int i=0; i<accList.size();i++) {
             oblist.add(accList.get(i).getIDacc() + " " + accList.get(i).getAccNum());
         }
 
-        combobox2.setItems(oblist);
+        comboboxAcc.setItems(oblist);
     }
 
     /*
@@ -112,8 +109,8 @@ public class AfterLog implements Initializable {
     }
 
     public int getIDClient() {
-        //System.out.println(combobox.getSelectionmModel().getSelectedIndex());
-        return combobox.getSelectionModel().getSelectedIndex();
+        //System.out.println(combobox.getSelectionModel().getSelectedIndex());
+        return clientList.get(combobox.getSelectionModel().getSelectedIndex()).getId();
     }
 
     /*public int getIDAccount() {

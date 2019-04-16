@@ -50,7 +50,7 @@ public class Database {
 
         try {
 
-            pst = conn.prepareStatement("SELECT * FROM Employee INNER JOIN loginEmployee ON Employee.ID = loginEmployee.IDEmployee WHERE login LIKE ? and password LIKE ?" );
+            pst = conn.prepareStatement("SELECT * FROM Employee INNER JOIN loginEmp ON Employee.ID = loginEmp.IDE WHERE login LIKE ? and password LIKE ?" );
             pst.setString(1,name);
             pst.setString(2,pass);
             rs = pst.executeQuery();
@@ -119,13 +119,13 @@ public class Database {
 
             PreparedStatement pst = null;
             ResultSet rs = null;
-            pst = conn.prepareStatement("SELECT * FROM Account where IDClient like ? ");
+            pst = conn.prepareStatement("SELECT * FROM Account where IDC like ? ");
             pst.setString(1,String.valueOf(id));
             rs = pst.executeQuery();
             while (rs.next()) {
 
                Account acc = new Account(rs.getInt("ID"),rs.getString("AccNum"),
-                        rs.getDouble("money"),rs.getInt("IDClient"));
+                        rs.getDouble("amount"),rs.getInt("IDC"));
                 System.out.println(acc.getAccNum());
                 accounts.add(acc);
             }
