@@ -96,7 +96,7 @@ public class AfterLog implements Initializable {
 
     public void clientInfo() throws SQLException {
 
-        Client selectedUser=Globals.db.selectClientInfo(clientList.get(getIDClient()).getId());
+        Client selectedUser=Globals.db.selectClientInfo(getIDClient());
 
        // System.out.println(selectedUser);
 

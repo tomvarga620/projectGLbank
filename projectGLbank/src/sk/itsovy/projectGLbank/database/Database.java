@@ -120,7 +120,7 @@ public class Database {
             PreparedStatement pst = null;
             ResultSet rs = null;
             pst = conn.prepareStatement("SELECT * FROM Account where IDC like ? ");
-            pst.setString(1,String.valueOf(id));
+            pst.setInt(1,id);
             rs = pst.executeQuery();
             while (rs.next()) {
 
@@ -146,7 +146,7 @@ public class Database {
             PreparedStatement pst = null;
             ResultSet rs = null;
             pst = conn.prepareStatement(query);
-            pst.setString(1,String.valueOf(id));
+            pst.setInt(1,id);
             rs = pst.executeQuery();
 
             while (rs.next()) {
