@@ -8,9 +8,9 @@ public class Account {
     private int IDc;
 
 
-    public Account(int IDacc, String accName, double money, int IDc) {
+    public Account(int IDacc, String accNum, double money, int IDc) {
         this.IDacc = IDacc;
-        this.AccNum = accName;
+        this.AccNum = accNum;
         this.money = money;
         this.IDc = IDc;
     }

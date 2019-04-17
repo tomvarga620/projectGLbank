@@ -165,4 +165,32 @@ public class Database {
     }
 
 
+    public Account selectAccInfo(int id){
+        Connection conn = getConnection();
+        Account acc = null;
+        String query = "SELECT * FROM Account where ID like ? ";
+
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            pst = conn.prepareStatement(query);
+            pst.setInt(1,id);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+
+                acc = new Account(rs.getInt("id"),rs.getString("AccNum"),rs.getDouble("money"),
+                        rs.getInt("idc"));
+
+            }
+            return acc;
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
 }
