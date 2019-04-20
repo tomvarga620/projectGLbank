@@ -168,7 +168,7 @@ public class Database {
     public Account selectAccInfo(int id){
         Connection conn = getConnection();
         Account acc = null;
-        String query = "SELECT * FROM Account where ID like ? ";
+        String query = "SELECT * FROM Account where id like ? ";
 
         try {
             PreparedStatement pst = null;
@@ -179,7 +179,7 @@ public class Database {
 
             while (rs.next()) {
 
-                acc = new Account(rs.getInt("id"),rs.getString("AccNum"),rs.getDouble("money"),
+                acc = new Account(rs.getInt("id"),rs.getString("AccNum"),rs.getDouble("amount"),
                         rs.getInt("idc"));
 
             }

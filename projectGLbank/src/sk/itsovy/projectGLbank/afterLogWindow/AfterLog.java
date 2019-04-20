@@ -32,6 +32,11 @@ public class AfterLog implements Initializable {
     public Label clientSurname;
     public Label clientMail;
 
+    //account labels
+    public Label accountIDField;
+    public Label accNumField;
+    public Label amountField;
+
     ArrayList<Client> clientList;
     ArrayList<Account> accList;
 //ok
@@ -108,14 +113,24 @@ public class AfterLog implements Initializable {
 
     }
 
+    public void AccInfo() throws SQLException {
+
+        Account acc = Globals.db.selectAccInfo(getIDAccount());
+        accountIDField.setText(String.valueOf(acc.getIDacc()));
+        accNumField.setText(acc.getAccNum());
+        amountField.setText(String.valueOf(acc.getMoney()));
+    }
+
     public int getIDClient() {
         //System.out.println(combobox.getSelectionModel().getSelectedIndex());
         return clientList.get(combobox.getSelectionModel().getSelectedIndex()).getId();
     }
 
-    /*public int getIDAccount() {
+    public int getIDAccount() {
        // System.out.println(combobox.getSelectionModel().getSelectedIndex());
-        return combobox.getSelectionModel().getSelectedIndex();
-    }*/
+        //return combobox.getSelectionModel().getSelectedIndex();
+        //return comboboxAcc.getSelectionModel().getSelectedIndex();
+        return accList.get(comboboxAcc.getSelectionModel().getSelectedIndex()).getIDacc();
+    }
 
 }
