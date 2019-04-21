@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import sk.itsovy.projectGLbank.*;
 
@@ -33,6 +30,10 @@ public class AfterLog implements Initializable {
     public Label accountIDField;
     public Label accNumField;
     public Label amountField;
+
+    //IB
+    public TextField IBusername;
+    public TextField IBpass;
 
     ArrayList<Client> clientList;
     ArrayList<Account> accList;

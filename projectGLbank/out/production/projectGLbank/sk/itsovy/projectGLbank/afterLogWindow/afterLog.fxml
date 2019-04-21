@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -40,7 +41,13 @@
                 </Tab>
                   <Tab text="IB">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="IBusername" layoutX="20.0" layoutY="38.0" />
+                              <TextField fx:id="IBpass" layoutX="20.0" layoutY="98.0" />
+                              <Label layoutX="20.0" layoutY="14.0" text="Login" />
+                              <Label layoutX="20.0" layoutY="75.0" text="Password" />
+                           </children></AnchorPane>
                     </content>
                   </Tab>
                   <Tab text="Cards">

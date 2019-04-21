@@ -16,6 +16,8 @@ public class Database {
     public static final String queryClientInfo = "SELECT * FROM Client where ID like ? ";
     public static final String queryAccountInfo = "SELECT * FROM Account where id like ? ";
     public static final String queryCards = "SELECT * FROM card WHERE ida LIKE ?";
+    public static final String queryInsertClient = "INSERT INTO client(fname,lname,email) VALUES(?,?,?) ";
+    public static final String queryInsertUser = "INSERT INTO loginclient(idc,login,password) VALUES('?','?','?');";
 
     private static Database db = new Database();
 

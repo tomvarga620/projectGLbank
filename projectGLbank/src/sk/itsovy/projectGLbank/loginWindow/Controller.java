@@ -57,4 +57,21 @@ public class Controller {
         }
 
     }
+
+    public void toCreateUser(ActionEvent actionEvent) {
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../createuserWindow/createUser.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage3 = new Stage();
+            stage3.setTitle("Create User");
+            stage3.setScene(new Scene(root1));
+
+            stage3.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
