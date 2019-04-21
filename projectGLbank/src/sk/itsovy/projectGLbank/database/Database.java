@@ -218,5 +218,10 @@ public class Database {
 
     }
 
+    public String generateAccNum(){
+        long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+        return String.valueOf(number);
+    }
+
 
 }
