@@ -13,6 +13,12 @@ import java.util.stream.Collectors;
 
 public class Database {
 
+    public static final String queryEmployee = "SELECT * FROM Employee INNER JOIN loginEmp ON Employee.ID = loginEmp.IDE WHERE login LIKE ? and password LIKE ?";
+    public static final String queryClient = "SELECT * FROM Client";
+    public static final String queryAccount = "SELECT * FROM Account where IDC like ? ";
+    public static final String queryClientInfo = "SELECT * FROM Client where ID like ? ";
+    public static final String queryAccountInfo = "SELECT * FROM Account where id like ? ";
+
     private static Database db = new Database();
 
     private Database(){
@@ -50,7 +56,7 @@ public class Database {
 
         try {
 
-            pst = conn.prepareStatement("SELECT * FROM Employee INNER JOIN loginEmp ON Employee.ID = loginEmp.IDE WHERE login LIKE ? and password LIKE ?" );
+            pst = conn.prepareStatement(queryEmployee);
             pst.setString(1,name);
             pst.setString(2,pass);
             rs = pst.executeQuery();
@@ -87,13 +93,12 @@ public class Database {
     public ArrayList<Client> selectClientsToList(){
         Connection conn = getConnection();
         //String query = "SELECT * FROM persons WHERE dnar <= Current_date() - 18 ";
-        String query = "SELECT * FROM Client";
         ArrayList <Client> clientList = new ArrayList<>();
 
         try {
             PreparedStatement pst = null;
             ResultSet rs = null;
-            pst = conn.prepareStatement(query);
+            pst = conn.prepareStatement(queryClient);
             rs = pst.executeQuery();
 
             while (rs.next()) {
@@ -119,7 +124,7 @@ public class Database {
 
             PreparedStatement pst = null;
             ResultSet rs = null;
-            pst = conn.prepareStatement("SELECT * FROM Account where IDC like ? ");
+            pst = conn.prepareStatement(queryAccount);
             pst.setInt(1,id);
             rs = pst.executeQuery();
             while (rs.next()) {
@@ -140,12 +145,11 @@ public class Database {
     public Client selectClientInfo(int id){
         Connection conn = getConnection();
         Client client = null;
-        String query = "SELECT * FROM Client where ID like ? ";
 
         try {
             PreparedStatement pst = null;
             ResultSet rs = null;
-            pst = conn.prepareStatement(query);
+            pst = conn.prepareStatement(queryClientInfo);
             pst.setInt(1,id);
             rs = pst.executeQuery();
 
@@ -168,12 +172,11 @@ public class Database {
     public Account selectAccInfo(int id){
         Connection conn = getConnection();
         Account acc = null;
-        String query = "SELECT * FROM Account where id like ? ";
 
         try {
             PreparedStatement pst = null;
             ResultSet rs = null;
-            pst = conn.prepareStatement(query);
+            pst = conn.prepareStatement(queryAccountInfo);
             pst.setInt(1,id);
             rs = pst.executeQuery();
 
