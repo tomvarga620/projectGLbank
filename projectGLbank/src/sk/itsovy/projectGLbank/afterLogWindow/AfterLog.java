@@ -10,10 +10,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.stage.Stage;
-import sk.itsovy.projectGLbank.Account;
-import sk.itsovy.projectGLbank.Client;
-import sk.itsovy.projectGLbank.Employee;
-import sk.itsovy.projectGLbank.Globals;
+import sk.itsovy.projectGLbank.*;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -39,7 +36,8 @@ public class AfterLog implements Initializable {
 
     ArrayList<Client> clientList;
     ArrayList<Account> accList;
-//ok
+    ArrayList<Card> cardList;
+
     public void setupAfterlog(Employee person, String position) {
 
         String name = person.getFirstname();
@@ -61,6 +59,8 @@ public class AfterLog implements Initializable {
     ComboBox combobox;
     @FXML
     ComboBox comboboxAcc;
+    @FXML
+    ComboBox comboboxCards;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -94,6 +94,18 @@ public class AfterLog implements Initializable {
         comboboxAcc.setItems(oblist);
     }
 
+    public void fillDropdown3(){
+        cardList = Globals.db.clientCards(getIDAccount());
+        ObservableList<String> oblist = FXCollections.observableArrayList();
+
+        for(int i=0; i<cardList.size();i++) {
+            oblist.add(cardList.get(i).getId() + " " + cardList.get(i).getIda() + " yy/mm " +cardList.get(i).getExpireM() +"/"+ cardList.get(i).getExpireY());
+        }
+
+        comboboxCards.setItems(oblist);
+        System.out.println(comboboxCards.getItems().size());
+    }
+
     /*
     public void clientFill(ActionEvent actionEvent) {
        clientName.setText(combobox.getValue().toString());
@@ -119,6 +131,8 @@ public class AfterLog implements Initializable {
         accountIDField.setText(String.valueOf(acc.getIDacc()));
         accNumField.setText(acc.getAccNum());
         amountField.setText(String.valueOf(acc.getMoney()));
+
+        fillDropdown3();
     }
 
     public int getIDClient() {
