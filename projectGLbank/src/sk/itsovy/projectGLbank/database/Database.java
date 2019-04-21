@@ -1,9 +1,6 @@
 package sk.itsovy.projectGLbank.database;
 
-import sk.itsovy.projectGLbank.Account;
-import sk.itsovy.projectGLbank.Client;
-import sk.itsovy.projectGLbank.Employee;
-import sk.itsovy.projectGLbank.Globals;
+import sk.itsovy.projectGLbank.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,6 +15,7 @@ public class Database {
     public static final String queryAccount = "SELECT * FROM Account where IDC like ? ";
     public static final String queryClientInfo = "SELECT * FROM Client where ID like ? ";
     public static final String queryAccountInfo = "SELECT * FROM Account where id like ? ";
+    public static final String queryCards = "SELECT * FROM card WHERE ida LIKE ?";
 
     private static Database db = new Database();
 
@@ -184,7 +182,6 @@ public class Database {
 
                 acc = new Account(rs.getInt("id"),rs.getString("AccNum"),rs.getDouble("amount"),
                         rs.getInt("idc"));
-
             }
             return acc;
 
@@ -193,6 +190,32 @@ public class Database {
         }
 
         return null;
+    }
+
+    public ArrayList<Card> clientCards(int idacc){
+        Connection conn = getConnection();
+        ArrayList <Card> cardList = new ArrayList<>();
+
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            pst = conn.prepareStatement(queryCards);
+            pst.setInt(1,idacc);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+
+                Card card = new Card(rs.getInt("id"),rs.getInt("ida"),rs.getString("PIN"),
+                rs.getInt("ExpireM"),rs.getInt("ExpireY"),rs.getBoolean("Active"));
+                cardList.add(card);
+            }
+            return cardList;
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+
     }
 
 
