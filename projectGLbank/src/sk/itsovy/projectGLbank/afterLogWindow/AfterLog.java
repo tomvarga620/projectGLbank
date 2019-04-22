@@ -164,4 +164,6 @@ public class AfterLog implements Initializable {
         return String.valueOf(number);
     }
 
+    public void ibLoginAction(ActionEvent actionEvent) {
+    }
 }

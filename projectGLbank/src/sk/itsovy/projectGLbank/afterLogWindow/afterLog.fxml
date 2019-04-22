@@ -41,12 +41,13 @@
                 </Tab>
                   <Tab text="IB">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="206.0" prefWidth="550.0">
                            <children>
                               <TextField fx:id="IBusername" layoutX="20.0" layoutY="38.0" />
                               <TextField fx:id="IBpass" layoutX="20.0" layoutY="98.0" />
                               <Label layoutX="20.0" layoutY="14.0" text="Login" />
                               <Label layoutX="20.0" layoutY="75.0" text="Password" />
+                              <Button fx:id="ibLogin" layoutX="70.0" layoutY="132.0" mnemonicParsing="false" onAction="#ibLoginAction" text="Login" />
                            </children></AnchorPane>
                     </content>
                   </Tab>
