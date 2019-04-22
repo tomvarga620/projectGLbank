@@ -165,5 +165,30 @@ public class AfterLog implements Initializable {
     }
 
     public void ibLoginAction(ActionEvent actionEvent) {
+
+        boolean userValid = Globals.db.checkUserExists(getIDClient(),IBusername.getText(),IBpass.getText());
+
+        if(userValid){
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../IB/Ib.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                Stage stage4 = new Stage();
+                stage4.setTitle("Create User");
+                stage4.setScene(new Scene(root1));
+
+                stage4.show();
+                System.out.println(getIDClient());
+                System.out.println(IBusername.getText());
+                System.out.println(IBpass.getText());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            System.out.println("Wrong login");
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 package sk.itsovy.projectGLbank.database;
 
 import sk.itsovy.projectGLbank.*;
+import sun.tools.tree.BooleanExpression;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,7 +18,9 @@ public class Database {
     public static final String queryAccountInfo = "SELECT * FROM Account where id like ? ";
     public static final String queryCards = "SELECT * FROM card WHERE ida LIKE ?";
     public static final String queryInsertClient = "INSERT INTO client(fname,lname,email) VALUES(?,?,?) ";
-    public static final String queryInsertUser = "INSERT INTO loginclient(idc,login,password) VALUES(?,?,?);";
+    public static final String queryInsertUser = "INSERT INTO loginclient(idc,login,password) VALUES(?,?,?)";
+    public static final String queryIfUserExists = "SELECT * from loginclient where idc = ? and login = ? and password = ?";
+
 
     //singleton database
     private static Database db = new Database();
@@ -263,6 +266,32 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+    }
+
+    public Boolean checkUserExists(int id, String loginName, String password){
+
+        Connection conn = getConnection();
+
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            pst = conn.prepareStatement(queryIfUserExists);
+            pst.setInt(1,id);
+            pst.setString(2,loginName);
+            pst.setString(3,password);
+            rs = pst.executeQuery();
+
+            boolean bool = rs.next();
+
+            return bool;
+
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return null;
 
     }
 
