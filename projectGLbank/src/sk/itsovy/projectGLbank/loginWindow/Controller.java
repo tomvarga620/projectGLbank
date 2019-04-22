@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sk.itsovy.projectGLbank.Employee;
@@ -19,6 +20,7 @@ public class Controller {
     public TextField username;
     public TextField pass;
     public Button button;
+    public Label errorLabel;
 
     public void login(ActionEvent actionEvent) {
         String name = username.getText();
@@ -54,24 +56,9 @@ public class Controller {
             System.out.println("bad login");
             username.setText("");
             pass.setText("");
+            errorLabel.setText("Username or Password is incorrect");
+
         }
 
     }
-
-    /*public void toCreateUser(ActionEvent actionEvent) {
-
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../createuserWindow/createUser.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage3 = new Stage();
-            stage3.setTitle("Create User");
-            stage3.setScene(new Scene(root1));
-
-            stage3.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }*/
 }
