@@ -4,11 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import sk.itsovy.projectGLbank.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -148,4 +152,19 @@ public class AfterLog implements Initializable {
         return accList.get(comboboxAcc.getSelectionModel().getSelectedIndex()).getIDacc();
     }
 
+    public void createUser(ActionEvent actionEvent) {
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../createuserWindow/createUser.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage3 = new Stage();
+            stage3.setTitle("Create User");
+            stage3.setScene(new Scene(root1));
+
+            stage3.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -58,7 +58,7 @@ public class Controller {
 
     }
 
-    public void toCreateUser(ActionEvent actionEvent) {
+    /*public void toCreateUser(ActionEvent actionEvent) {
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../createuserWindow/createUser.fxml"));
@@ -73,5 +73,5 @@ public class Controller {
             e.printStackTrace();
         }
 
-    }
+    }*/
 }
