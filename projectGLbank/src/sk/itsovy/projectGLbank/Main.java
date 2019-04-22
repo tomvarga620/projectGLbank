@@ -22,6 +22,7 @@ public class Main extends Application {
         db.getConnection();*/
         /*long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
         System.out.println(number);*/
+
         launch(args);
 
     }

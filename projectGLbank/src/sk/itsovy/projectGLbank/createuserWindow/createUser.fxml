@@ -10,15 +10,17 @@
    <children>
       <Pane prefHeight="400.0" prefWidth="600.0">
          <children>
-            <TextField layoutX="220.0" layoutY="35.0" />
-            <Label layoutX="265.0" layoutY="10.0" text="text" />
-            <TextField layoutX="220.0" layoutY="90.0" />
-            <Label layoutX="265.0" layoutY="65.0" text="text" />
-            <TextField layoutX="220.0" layoutY="145.0" />
-            <Label layoutX="280.0" layoutY="120.0" text="text" />
-            <TextField layoutX="220.0" layoutY="200.0" />
-            <Label layoutX="265.0" layoutY="175.0" text="text" />
-            <Button fx:id="createUser" layoutX="274.0" layoutY="253.0" mnemonicParsing="false" onAction="#createUserAction" text="Confim" />
+            <TextField fx:id="fnameFX" layoutX="220.0" layoutY="35.0" />
+            <Label layoutX="265.0" layoutY="10.0" text="First Name" />
+            <TextField fx:id="lnameFX" layoutX="220.0" layoutY="90.0" />
+            <Label layoutX="265.0" layoutY="65.0" text="Last Name" />
+            <TextField fx:id="emailFX" layoutX="220.0" layoutY="145.0" />
+            <Label layoutX="280.0" layoutY="120.0" text="Email" />
+            <TextField fx:id="loginFX" layoutX="220.0" layoutY="200.0" />
+            <Label layoutX="265.0" layoutY="175.0" text="Login Name" />
+            <Button fx:id="createUser" layoutX="272.0" layoutY="307.0" mnemonicParsing="false" onAction="#createUserAction" text="Confim" />
+            <TextField fx:id="passwordFX" layoutX="219.0" layoutY="264.0" />
+            <Label layoutX="270.0" layoutY="235.0" text="Password" />
          </children>
       </Pane>
    </children>

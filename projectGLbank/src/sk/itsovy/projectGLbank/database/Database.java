@@ -19,6 +19,7 @@ public class Database {
     public static final String queryInsertClient = "INSERT INTO client(fname,lname,email) VALUES(?,?,?) ";
     public static final String queryInsertUser = "INSERT INTO loginclient(idc,login,password) VALUES('?','?','?');";
 
+    //singleton database
     private static Database db = new Database();
 
     private Database(){
@@ -29,6 +30,8 @@ public class Database {
         return db;
     }
 
+
+    //get connection to mysql
     public static Connection getConnection(){
         Connection connection;
         try {
@@ -47,7 +50,7 @@ public class Database {
         return null;
     }
 
-
+    //method for validate login
     public Employee compareEmployee(String name, String pass){
 
         Connection conn = getConnection();
@@ -76,6 +79,8 @@ public class Database {
         return null;
     }
 
+
+    //method for position of employee
     public String getPosition(Employee emp){
         int position = emp.getPosition();
         String boss = "boss";
@@ -90,6 +95,7 @@ public class Database {
         }
     }
 
+    //method for select clients to combobox
     public ArrayList<Client> selectClientsToList(){
         Connection conn = getConnection();
         //String query = "SELECT * FROM persons WHERE dnar <= Current_date() - 18 ";
@@ -115,6 +121,7 @@ public class Database {
 
     }
 
+    //method for select accounts to combobox
     public ArrayList<Account> selectAccountsToList(int id) {
 
         Connection conn = getConnection();
@@ -141,7 +148,7 @@ public class Database {
         return accounts;
     }
 
-
+    //select client info to labels in client tab
     public Client selectClientInfo(int id){
         Connection conn = getConnection();
         Client client = null;
@@ -168,7 +175,7 @@ public class Database {
         return null;
     }
 
-
+    // select account info to labels in account tab
     public Account selectAccInfo(int id){
         Connection conn = getConnection();
         Account acc = null;
@@ -194,6 +201,7 @@ public class Database {
         return null;
     }
 
+    //select cards to comboboxCards
     public ArrayList<Card> clientCards(int idacc){
         Connection conn = getConnection();
         ArrayList <Card> cardList = new ArrayList<>();
@@ -219,11 +227,5 @@ public class Database {
         return null;
 
     }
-
-    public String generateAccNum(){
-        long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
-        return String.valueOf(number);
-    }
-
 
 }

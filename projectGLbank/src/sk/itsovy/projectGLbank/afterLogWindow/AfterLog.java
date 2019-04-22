@@ -43,6 +43,15 @@ public class AfterLog implements Initializable {
     ArrayList<Account> accList;
     ArrayList<Card> cardList;
 
+    //comboboxes
+    @FXML
+    ComboBox combobox;
+    @FXML
+    ComboBox comboboxAcc;
+    @FXML
+    ComboBox comboboxCards;
+
+
     public void setupAfterlog(Employee person, String position) {
 
         String name = person.getFirstname();
@@ -52,7 +61,6 @@ public class AfterLog implements Initializable {
         afterLogSurname.setText(surname);
         afterLogPosition.setText(position);
 
-        //afterLogName.setText("test");
     }
 
     public void logoutbtn(ActionEvent actionEvent) {
@@ -60,21 +68,13 @@ public class AfterLog implements Initializable {
         stage.close();
     }
 
-    @FXML
-    ComboBox combobox;
-    @FXML
-    ComboBox comboboxAcc;
-    @FXML
-    ComboBox comboboxCards;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("test");
-        fillDropdown();
-       // Globals.db.selectAccountsToList(2); select ide
+        fillDropdownClients();
     }
 
-    public void fillDropdown(){
+    public void fillDropdownClients(){
         clientList = Globals.db.selectClientsToList();
         ObservableList<String> oblist = FXCollections.observableArrayList();
 
@@ -87,8 +87,7 @@ public class AfterLog implements Initializable {
     }
 
 
-    public void fillDropdown2(){
-        //accList = Globals.db.selectAccountsToList(clientList.get(getIDClient()).getId());
+    public void fillDropdownAccounts(){
         accList = Globals.db.selectAccountsToList(getIDClient());
         ObservableList<String> oblist = FXCollections.observableArrayList();
 
@@ -99,7 +98,7 @@ public class AfterLog implements Initializable {
         comboboxAcc.setItems(oblist);
     }
 
-    public void fillDropdown3(){
+    public void fillDropdownCards(){
         cardList = Globals.db.clientCards(getIDAccount());
         ObservableList<String> oblist = FXCollections.observableArrayList();
 
@@ -111,11 +110,6 @@ public class AfterLog implements Initializable {
         System.out.println(comboboxCards.getItems().size());
     }
 
-    /*
-    public void clientFill(ActionEvent actionEvent) {
-       clientName.setText(combobox.getValue().toString());
-    }*/
-
     public void clientInfo() throws SQLException {
 
         Client selectedUser=Globals.db.selectClientInfo(getIDClient());
@@ -126,7 +120,7 @@ public class AfterLog implements Initializable {
         clientSurname.setText(selectedUser.getLastName());
         clientMail.setText(String.valueOf(selectedUser.getEmail()));
 
-        fillDropdown2();
+        fillDropdownAccounts();
 
     }
 
@@ -137,18 +131,14 @@ public class AfterLog implements Initializable {
         accNumField.setText(acc.getAccNum());
         amountField.setText(String.valueOf(acc.getMoney()));
 
-        fillDropdown3();
+        fillDropdownCards();
     }
 
     public int getIDClient() {
-        //System.out.println(combobox.getSelectionModel().getSelectedIndex());
         return clientList.get(combobox.getSelectionModel().getSelectedIndex()).getId();
     }
 
     public int getIDAccount() {
-       // System.out.println(combobox.getSelectionModel().getSelectedIndex());
-        //return combobox.getSelectionModel().getSelectedIndex();
-        //return comboboxAcc.getSelectionModel().getSelectedIndex();
         return accList.get(comboboxAcc.getSelectionModel().getSelectedIndex()).getIDacc();
     }
 
@@ -167,4 +157,11 @@ public class AfterLog implements Initializable {
             e.printStackTrace();
         }
     }
+
+    //generate account number for client's account
+    public String generateAccNum(){
+        long number = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
+        return String.valueOf(number);
+    }
+
 }
