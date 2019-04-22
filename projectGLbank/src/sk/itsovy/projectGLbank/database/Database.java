@@ -17,7 +17,7 @@ public class Database {
     public static final String queryAccountInfo = "SELECT * FROM Account where id like ? ";
     public static final String queryCards = "SELECT * FROM card WHERE ida LIKE ?";
     public static final String queryInsertClient = "INSERT INTO client(fname,lname,email) VALUES(?,?,?) ";
-    public static final String queryInsertUser = "INSERT INTO loginclient(idc,login,password) VALUES('?','?','?');";
+    public static final String queryInsertUser = "INSERT INTO loginclient(idc,login,password) VALUES(?,?,?);";
 
     //singleton database
     private static Database db = new Database();
@@ -229,6 +229,7 @@ public class Database {
     }
 
     public void insertUser(String fname,String lname,String email,String loginName,String pass){
+        int id = 0;
         try {
             Connection conn = getConnection();
 
@@ -241,13 +242,12 @@ public class Database {
 
             int insert1 = pst1.executeUpdate();
 
-            ResultSet rslt = pst1.getGeneratedKeys();
 
-            System.out.println("result of generatedKeys"+rslt);
-
-            int id = rslt.getInt("id" );
-
-            System.out.println(id);
+            ResultSet rs = pst1.getGeneratedKeys();
+            while(rs.next()){
+                System.out.println("Result Set: " + rs.toString());
+                id = rs.getInt(1);
+            }
 
             //loginclient table
             pst2.setInt(1,id);
@@ -257,6 +257,8 @@ public class Database {
             int insert2 = pst2.executeUpdate();
 
             System.out.println("User inserted");
+
+            conn.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
