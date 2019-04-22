@@ -188,6 +188,8 @@ public class AfterLog implements Initializable {
         else
         {
             System.out.println("Wrong login");
+            IBusername.setText("");
+            IBpass.setText("");
         }
 
     }

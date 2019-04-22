@@ -20,6 +20,7 @@ public class Database {
     public static final String queryInsertClient = "INSERT INTO client(fname,lname,email) VALUES(?,?,?) ";
     public static final String queryInsertUser = "INSERT INTO loginclient(idc,login,password) VALUES(?,?,?)";
     public static final String queryIfUserExists = "SELECT * from loginclient where idc = ? and login = ? and password = ?";
+    public static final String queryUnblockCard = "UPDATE card SET Active = 1  WHERE ida = ? ";
 
 
     //singleton database
@@ -292,6 +293,30 @@ public class Database {
         }
 
         return null;
+
+    }
+
+    public int unblockCard(int ida){
+
+        Connection conn = getConnection();
+
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            pst = conn.prepareStatement(queryUnblockCard);
+            pst.setInt(1,ida);
+            int rslt= pst.executeUpdate();
+
+            System.out.println(rslt);
+            return rslt;
+
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return 0;
+
 
     }
 

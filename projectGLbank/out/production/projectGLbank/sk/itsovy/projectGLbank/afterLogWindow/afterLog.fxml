@@ -48,7 +48,7 @@
                               <Label layoutX="20.0" layoutY="14.0" text="Login" />
                               <Label layoutX="20.0" layoutY="75.0" text="Password" />
                               <Button fx:id="ibLogin" layoutX="70.0" layoutY="132.0" mnemonicParsing="false" onAction="#ibLoginAction" text="Login" />
-                              <PasswordField fx:id="IBpass" layoutX="20.0" layoutY="90.0" />
+                              <PasswordField fx:id="IBpass" layoutX="20.0" layoutY="95.0" />
                            </children></AnchorPane>
                     </content>
                   </Tab>
