@@ -228,4 +228,41 @@ public class Database {
 
     }
 
+    public void insertUser(String fname,String lname,String email,String loginName,String pass){
+        try {
+            Connection conn = getConnection();
+
+            PreparedStatement pst1 = conn.prepareStatement(queryInsertClient,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement pst2 = conn.prepareStatement(queryInsertUser);
+            //client table
+            pst1.setString(1,fname);
+            pst1.setString(2,lname);
+            pst1.setString(3,email);
+
+            int insert1 = pst1.executeUpdate();
+
+            ResultSet rslt = pst1.getGeneratedKeys();
+
+            System.out.println("result of generatedKeys"+rslt);
+
+            int id = rslt.getInt("id" );
+
+            System.out.println(id);
+
+            //loginclient table
+            pst2.setInt(1,id);
+            pst2.setString(2,loginName);
+            pst2.setString(3,pass);
+
+            int insert2 = pst2.executeUpdate();
+
+            System.out.println("User inserted");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 }

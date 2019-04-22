@@ -2,6 +2,7 @@ package sk.itsovy.projectGLbank.createuserWindow;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
+import sk.itsovy.projectGLbank.Globals;
 
 import java.util.Random;
 
@@ -15,14 +16,16 @@ public class CreateUser {
 
     public void createUserAction(ActionEvent actionEvent) {
 
-        fnameFX.getText();
-        lnameFX.getText();
-        emailFX.getText();
-        loginFX.getText();
-        passwordFX.getText();
+        String fname = fnameFX.getText();
+        String lname = lnameFX.getText();
+        String email = emailFX.getText();
+        String loginName = loginFX.getText();
+        String pass = passwordFX.getText();
 
         System.out.println(generateLogin());
-        System.out.println(generatePassword());
+        System.out.println(generatePass());
+
+        Globals.db.insertUser(fname,lname,email,loginName,pass);
 
     }
 
@@ -40,7 +43,7 @@ public class CreateUser {
 
     }
 
-    public String generatePassword(){
+    public String generatePass(){
 
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrst1234567890";
         StringBuilder randomstring = new StringBuilder();
