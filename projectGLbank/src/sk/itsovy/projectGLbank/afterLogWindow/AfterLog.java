@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import sk.itsovy.projectGLbank.*;
+import sk.itsovy.projectGLbank.IB.Ib;
 
 import java.io.IOException;
 import java.net.URL;
@@ -170,16 +171,23 @@ public class AfterLog implements Initializable {
 
         if(userValid){
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../IB/Ib.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../IB/ib.fxml"));
                 Parent root1 = (Parent) fxmlLoader.load();
                 Stage stage4 = new Stage();
-                stage4.setTitle("Create User");
+                stage4.setTitle("Internet Banking");
                 stage4.setScene(new Scene(root1));
 
+                /*
+                AfterLog acc;
+                acc = fxmlLoader.getController();
+                acc.setupAfterlog(person,position);
+                */
+
+                Ib ib = new Ib();
+                ib = fxmlLoader.getController();
+                ib.getId(getIDAccount(),getIDClient());
+
                 stage4.show();
-                System.out.println(getIDClient());
-                System.out.println(IBusername.getText());
-                System.out.println(IBpass.getText());
 
             } catch (IOException e) {
                 e.printStackTrace();

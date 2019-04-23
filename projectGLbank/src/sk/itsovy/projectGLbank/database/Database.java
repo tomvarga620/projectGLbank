@@ -21,6 +21,8 @@ public class Database {
     public static final String queryInsertUser = "INSERT INTO loginclient(idc,login,password) VALUES(?,?,?)";
     public static final String queryIfUserExists = "SELECT * from loginclient where idc = ? and login = ? and password = ?";
     public static final String queryUnblockCard = "UPDATE card SET Active = 1  WHERE ida = ? ";
+    public static final String queryIfPassExists = "SELECT * from loginclient where idc = ? and password = ? ";
+    public static final String queryInsertPass = "UPDATE loginclient SET password = ?  WHERE idc = ? ";
 
 
     //singleton database
@@ -307,7 +309,8 @@ public class Database {
             pst.setInt(1,ida);
             int rslt= pst.executeUpdate();
 
-            System.out.println(rslt);
+            //System.out.println(rslt);
+            System.out.println("Card is actived");
             return rslt;
 
 
@@ -317,8 +320,61 @@ public class Database {
 
         return 0;
 
+    }
+
+
+
+    public Boolean checkPassExists(int idc,String password){
+
+        Connection conn = getConnection();
+
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            pst = conn.prepareStatement(queryIfPassExists);
+            pst.setInt(1,idc);
+            pst.setString(2,password);
+            rs = pst.executeQuery();
+
+            boolean bool = rs.next();
+
+            return bool;
+
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return null;
 
     }
+
+
+    public int resetPass(int idc,String password){
+
+        Connection conn = getConnection();
+
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            pst = conn.prepareStatement(queryInsertPass);
+            pst.setString(1,password);
+            pst.setInt(2,idc);
+            int rslt= pst.executeUpdate();
+
+            //System.out.println(rslt);
+            System.out.println("Password is reseted");
+            return rslt;
+
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return 0;
+
+    }
+
 
 
 }
