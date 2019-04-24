@@ -143,6 +143,10 @@ public class AfterLog implements Initializable {
         return accList.get(comboboxAcc.getSelectionModel().getSelectedIndex()).getIDacc();
     }
 
+    public int getIDcard() {
+        return cardList.get(comboboxCards.getSelectionModel().getSelectedIndex()).getId();
+    }
+
     public void createUser(ActionEvent actionEvent) {
 
         try {
@@ -200,5 +204,9 @@ public class AfterLog implements Initializable {
             IBpass.setText("");
         }
 
+    }
+
+    public void unblockBtnAction(ActionEvent actionEvent) {
+        Globals.db.unblockCard(getIDClient(),getIDAccount());
     }
 }

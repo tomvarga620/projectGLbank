@@ -20,10 +20,10 @@ public class Ib {
 
     }
 
-    public void unblockCard(ActionEvent actionEvent){
+   /* public void unblockCard(ActionEvent actionEvent){
         //System.out.println("id account "+ida);
         Globals.db.unblockCard(ida);
-    }
+    }*/
 
     public void resetBtn(ActionEvent actionEvent) {
         boolean userValid = Globals.db.checkPassExists(idc,oldPass.getText());

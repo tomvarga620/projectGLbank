@@ -20,7 +20,7 @@ public class Database {
     public static final String queryInsertClient = "INSERT INTO client(fname,lname,email) VALUES(?,?,?) ";
     public static final String queryInsertUser = "INSERT INTO loginclient(idc,login,password) VALUES(?,?,?)";
     public static final String queryIfUserExists = "SELECT * from loginclient where idc = ? and login = ? and password = ?";
-    public static final String queryUnblockCard = "UPDATE card SET Active = 1  WHERE ida = ? ";
+    public static final String queryUnblockCard = "UPDATE card SET Active = 1  WHERE id = ? and ida = ?";
     public static final String queryIfPassExists = "SELECT * from loginclient where idc = ? and password = ? ";
     public static final String queryInsertPass = "UPDATE loginclient SET password = ?  WHERE idc = ? ";
 
@@ -298,7 +298,7 @@ public class Database {
 
     }
 
-    public int unblockCard(int ida){
+    public int unblockCard(int id , int ida ){
 
         Connection conn = getConnection();
 
@@ -306,7 +306,8 @@ public class Database {
             PreparedStatement pst = null;
             ResultSet rs = null;
             pst = conn.prepareStatement(queryUnblockCard);
-            pst.setInt(1,ida);
+            pst.setInt(1,id);
+            pst.setInt(2,ida);
             int rslt= pst.executeUpdate();
 
             //System.out.println(rslt);
@@ -321,8 +322,6 @@ public class Database {
         return 0;
 
     }
-
-
 
     public Boolean checkPassExists(int idc,String password){
 
@@ -349,7 +348,6 @@ public class Database {
 
     }
 
-
     public int resetPass(int idc,String password){
 
         Connection conn = getConnection();
@@ -374,7 +372,5 @@ public class Database {
         return 0;
 
     }
-
-
 
 }
