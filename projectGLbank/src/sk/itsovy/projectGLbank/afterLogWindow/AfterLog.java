@@ -189,7 +189,7 @@ public class AfterLog implements Initializable {
 
                 Ib ib = new Ib();
                 ib = fxmlLoader.getController();
-                ib.getId(getIDAccount(),getIDClient());
+                ib.getId(getIDClient());
 
                 stage4.show();
 

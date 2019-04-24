@@ -8,14 +8,12 @@ import sk.itsovy.projectGLbank.afterLogWindow.AfterLog;
 import javax.xml.soap.Text;
 
 public class Ib {
-    private int ida;
     private int idc;
     public TextField oldPass;
     public TextField newPass;
 
-    public void getId(int ida,int idc){
+    public void getId(int idc){
         //System.out.println(ida);
-        this.ida = ida;
         this.idc = idc;
 
     }
