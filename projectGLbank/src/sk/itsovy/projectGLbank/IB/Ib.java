@@ -37,4 +37,7 @@ public class Ib {
 
     }
 
+    public void resetAccount(ActionEvent actionEvent) {
+        
+    }
 }
