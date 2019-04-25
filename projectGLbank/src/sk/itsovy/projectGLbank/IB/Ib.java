@@ -23,21 +23,19 @@ public class Ib {
         Globals.db.unblockCard(ida);
     }*/
 
-    public void resetBtn(ActionEvent actionEvent) {
+
+    public void resetAccount(ActionEvent actionEvent) {
         boolean userValid = Globals.db.checkPassExists(idc,oldPass.getText());
 
         if(userValid){
             Globals.db.resetPass(idc,newPass.getText());
+            oldPass.setText("");
+            newPass.setText("");
         }
         else
         {
             System.out.println("bad old pass");
             oldPass.setText("");
         }
-
-    }
-
-    public void resetAccount(ActionEvent actionEvent) {
-        
     }
 }
