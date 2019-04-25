@@ -1,6 +1,7 @@
 package sk.itsovy.projectGLbank.IB;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import sk.itsovy.projectGLbank.Globals;
 import sk.itsovy.projectGLbank.afterLogWindow.AfterLog;
@@ -11,6 +12,7 @@ public class Ib {
     private int idc;
     public TextField oldPass;
     public TextField newPass;
+    public CheckBox blockCheck;
 
     public void getId(int idc){
         //System.out.println(ida);
@@ -37,5 +39,16 @@ public class Ib {
             System.out.println("bad old pass");
             oldPass.setText("");
         }
+    }
+
+    public void blockCheckAction(ActionEvent actionEvent) {
+        if(blockCheck.isSelected()) {
+            System.out.println("test");
+            Globals.db.blockUserLogin(idc);
+        }else {
+            System.out.println("test2");
+            Globals.db.unblockUserLogin(idc);
+        }
+
     }
 }

@@ -11,19 +11,22 @@ import java.util.stream.Collectors;
 
 public class Database {
 
-    public static final String queryEmployee = "SELECT * FROM Employee INNER JOIN loginEmp ON Employee.ID = loginEmp.IDE WHERE login LIKE ? and password LIKE ?";
-    public static final String queryClient = "SELECT * FROM Client";
-    public static final String queryAccount = "SELECT * FROM Account where IDC like ? ";
-    public static final String queryClientInfo = "SELECT * FROM Client where ID like ? ";
-    public static final String queryAccountInfo = "SELECT * FROM Account where id like ? ";
-    public static final String queryCards = "SELECT * FROM card WHERE ida LIKE ?";
-    public static final String queryInsertClient = "INSERT INTO client(fname,lname,email) VALUES(?,?,?) ";
-    public static final String queryInsertUser = "INSERT INTO loginclient(idc,login,password) VALUES(?,?,?)";
-    public static final String queryIfUserExists = "SELECT * from loginclient where idc = ? and login = ? and password = ?";
-    public static final String queryUnblockCard = "UPDATE card SET Active = 1  WHERE id = ? and ida = ?";
-    public static final String queryBlockCard = "UPDATE card SET Active = 0  WHERE id = ? and ida = ?";
-    public static final String queryIfPassExists = "SELECT * from loginclient where idc = ? and password = ? ";
-    public static final String queryInsertPass = "UPDATE loginclient SET password = ?  WHERE idc = ? ";
+    private static final String queryEmployee = "SELECT * FROM Employee INNER JOIN loginEmp ON Employee.ID = loginEmp.IDE WHERE login LIKE ? and password LIKE ?";
+    private static final String queryClient = "SELECT * FROM Client";
+    private static final String queryAccount = "SELECT * FROM Account where IDC like ? ";
+    private static final String queryClientInfo = "SELECT * FROM Client where ID like ? ";
+    private static final String queryAccountInfo = "SELECT * FROM Account where id like ? ";
+    private static final String queryCards = "SELECT * FROM card WHERE ida LIKE ?";
+    private static final String queryInsertClient = "INSERT INTO client(fname,lname,email) VALUES(?,?,?) ";
+    private static final String queryInsertUser = "INSERT INTO loginclient(idc,login,password) VALUES(?,?,?)";
+    private static final String queryIfUserExists = "SELECT * from loginclient where idc = ? and login = ? and password = ?";
+    private static final String queryUnblockCard = "UPDATE card SET Active = 1  WHERE id = ? and ida = ?";
+    private static final String queryBlockCard = "UPDATE card SET Active = 0  WHERE id = ? and ida = ?";
+    private static final String queryIfPassExists = "SELECT * from loginclient where idc = ? and password = ? ";
+    private static final String queryUpdatePass = "UPDATE loginclient SET password = ?  WHERE idc = ? ";
+    private static final String queryBlockUser = "INSERT INTO loginhistory(idl) VALUES (SELECT id FROM loginclient WHERE idc = ?)";
+    private static final String queryUnblockUser = "insert into loginhistory(idl,success) values((select id from loginclient where idc = ?),true)";
+    private static final String queryLastRecord = "select * from loginhistory where idl = (select id from loginclient where idc = ?)order by UNIX_TIMESTAMP(logDate) desc limit 1";
 
 
     //singleton database
@@ -381,7 +384,7 @@ public class Database {
         try {
             PreparedStatement pst = null;
             ResultSet rs = null;
-            pst = conn.prepareStatement(queryInsertPass);
+            pst = conn.prepareStatement(queryUpdatePass);
             pst.setString(1,password);
             pst.setInt(2,idc);
             int rslt= pst.executeUpdate();
@@ -397,6 +400,53 @@ public class Database {
 
         return 0;
 
+    }
+
+
+    public void blockUserLogin(int idc){
+
+        Connection con = getConnection();
+
+        try {
+            PreparedStatement stmnt = con.prepareStatement(queryBlockUser);
+            stmnt.setInt(1,idc);
+            con.close();
+            System.out.println("blocked user");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void unblockUserLogin(int idc){
+
+        Connection con = getConnection();
+
+        try {
+            PreparedStatement stmnt = con.prepareStatement(queryUnblockUser);
+            stmnt.setInt(1,idc);
+            con.close();
+            System.out.println("unblocked user");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void checkBlock(int idc){
+        Connection con = getConnection();
+        String isBlocked;
+        try {
+            PreparedStatement statement = con.prepareStatement(queryLastRecord);
+            statement.setInt(1,idc);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            isBlocked = resultSet.getString("success");
+
+            System.out.println(isBlocked);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }
