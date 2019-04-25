@@ -209,4 +209,8 @@ public class AfterLog implements Initializable {
     public void unblockBtnAction(ActionEvent actionEvent) {
         Globals.db.unblockCard(getIDClient(),getIDAccount());
     }
+
+    public void blockBtnAction(ActionEvent actionEvent) {
+        Globals.db.blockCard(getIDClient(),getIDAccount());
+    }
 }

@@ -21,6 +21,7 @@ public class Database {
     public static final String queryInsertUser = "INSERT INTO loginclient(idc,login,password) VALUES(?,?,?)";
     public static final String queryIfUserExists = "SELECT * from loginclient where idc = ? and login = ? and password = ?";
     public static final String queryUnblockCard = "UPDATE card SET Active = 1  WHERE id = ? and ida = ?";
+    public static final String queryBlockCard = "UPDATE card SET Active = 0  WHERE id = ? and ida = ?";
     public static final String queryIfPassExists = "SELECT * from loginclient where idc = ? and password = ? ";
     public static final String queryInsertPass = "UPDATE loginclient SET password = ?  WHERE idc = ? ";
 
@@ -312,6 +313,31 @@ public class Database {
 
             //System.out.println(rslt);
             System.out.println("Card is actived");
+            return rslt;
+
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return 0;
+
+    }
+
+    public int blockCard(int id , int ida ){
+
+        Connection conn = getConnection();
+
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            pst = conn.prepareStatement(queryBlockCard);
+            pst.setInt(1,id);
+            pst.setInt(2,ida);
+            int rslt= pst.executeUpdate();
+
+            //System.out.println(rslt);
+            System.out.println("Card is blocked");
             return rslt;
 
 
