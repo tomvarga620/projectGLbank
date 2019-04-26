@@ -24,8 +24,8 @@ public class Database {
     private static final String queryBlockCard = "UPDATE card SET Active = 0  WHERE id = ? and ida = ?";
     private static final String queryIfPassExists = "SELECT * from loginclient where idc = ? and password = ? ";
     private static final String queryUpdatePass = "UPDATE loginclient SET password = ?  WHERE idc = ? ";
-    private static final String queryBlockUser = "INSERT INTO loginhistory(idl) VALUES (SELECT id FROM loginclient WHERE idc = ?)";
-    private static final String queryUnblockUser = "insert into loginhistory(idl,success) values((select id from loginclient where idc = ?),true)";
+    private static final String queryBlockUser = "INSERT INTO loginhistory(idl) VALUES (?)";
+    private static final String queryUnblockUser = "INSERT INTO loginhistory(idl,success) VALUES(?,1)";
     private static final String queryLastRecord = "select * from loginhistory where idl = (select id from loginclient where idc = ?)order by UNIX_TIMESTAMP(logDate) desc limit 1";
 
 
@@ -410,6 +410,7 @@ public class Database {
         try {
             PreparedStatement stmnt = con.prepareStatement(queryBlockUser);
             stmnt.setInt(1,idc);
+            stmnt.execute();
             con.close();
             System.out.println("blocked user");
 
@@ -425,6 +426,7 @@ public class Database {
         try {
             PreparedStatement stmnt = con.prepareStatement(queryUnblockUser);
             stmnt.setInt(1,idc);
+            stmnt.execute();
             con.close();
             System.out.println("unblocked user");
 
