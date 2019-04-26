@@ -11,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import sk.itsovy.projectGLbank.*;
-import sk.itsovy.projectGLbank.IB.Ib;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,13 +35,17 @@ public class AfterLog implements Initializable {
     public Label accNumField;
     public Label amountField;
 
-    //IB
-    public TextField IBusername;
-    public TextField IBpass;
+    //checkbox blocking client
+    public CheckBox blockCheck;
+
+    //generated pass label
+    public Label newPass;
 
     ArrayList<Client> clientList;
     ArrayList<Account> accList;
     ArrayList<Card> cardList;
+
+    Globals generated = new Globals();
 
     //comboboxes
     @FXML
@@ -169,48 +172,31 @@ public class AfterLog implements Initializable {
         return String.valueOf(number);
     }
 
-    public void ibLoginAction(ActionEvent actionEvent) {
-
-        boolean userValid = Globals.db.checkUserExists(getIDClient(),IBusername.getText(),IBpass.getText());
-
-        if(userValid){
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../IB/ib.fxml"));
-                Parent root1 = (Parent) fxmlLoader.load();
-                Stage stage4 = new Stage();
-                stage4.setTitle("Internet Banking");
-                stage4.setScene(new Scene(root1));
-
-                /*
-                AfterLog acc;
-                acc = fxmlLoader.getController();
-                acc.setupAfterlog(person,position);
-                */
-
-                Ib ib = new Ib();
-                ib = fxmlLoader.getController();
-                ib.getId(getIDClient());
-
-                stage4.show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else
-        {
-            System.out.println("Wrong login");
-            IBusername.setText("");
-            IBpass.setText("");
-        }
-
-    }
-
     public void unblockBtnAction(ActionEvent actionEvent) {
         Globals.db.unblockCard(getIDClient(),getIDAccount());
     }
 
     public void blockBtnAction(ActionEvent actionEvent) {
         Globals.db.blockCard(getIDClient(),getIDAccount());
+    }
+
+
+    public void blockCheckAction(ActionEvent actionEvent) {
+
+        if(blockCheck.isSelected()) {
+            System.out.println("test");
+            Globals.db.blockUserLogin(getIDClient());
+        }else {
+            System.out.println("test2");
+            Globals.db.unblockUserLogin(getIDClient());
+        }
+
+    }
+
+    public void resetPassAction(ActionEvent actionEvent) {
+        System.out.println("test btn");
+        String newpass = generated.generatePass();
+        Globals.db.resetPass(getIDClient(),newpass);
+        newPass.setText(newpass);
     }
 }

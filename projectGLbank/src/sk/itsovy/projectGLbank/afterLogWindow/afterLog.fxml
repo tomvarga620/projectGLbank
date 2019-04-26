@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -44,11 +43,9 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="206.0" prefWidth="550.0">
                            <children>
-                              <TextField fx:id="IBusername" layoutX="20.0" layoutY="38.0" />
-                              <Label layoutX="20.0" layoutY="14.0" text="Login" />
-                              <Label layoutX="20.0" layoutY="75.0" text="Password" />
-                              <Button fx:id="ibLogin" layoutX="70.0" layoutY="132.0" mnemonicParsing="false" onAction="#ibLoginAction" text="Login" />
-                              <PasswordField fx:id="IBpass" layoutX="20.0" layoutY="95.0" />
+                              <Button fx:id="resetPass" layoutX="46.0" layoutY="39.0" mnemonicParsing="false" onAction="#resetPassAction" text="Reset Password" />
+                              <CheckBox fx:id="blockCheck" layoutX="46.0" layoutY="84.0" mnemonicParsing="false" onAction="#blockCheckAction" text="Block Client" />
+                              <Label fx:id="newPass" layoutX="46.0" layoutY="14.0" />
                            </children></AnchorPane>
                     </content>
                   </Tab>

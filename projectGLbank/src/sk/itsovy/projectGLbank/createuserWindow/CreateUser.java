@@ -13,6 +13,7 @@ public class CreateUser {
     public TextField emailFX;
     public TextField loginFX;
     public TextField passwordFX;
+    Globals generated = new Globals();
 
     public void createUserAction(ActionEvent actionEvent) {
 
@@ -22,38 +23,10 @@ public class CreateUser {
         String loginName = loginFX.getText();
         String pass = passwordFX.getText();
 
-        System.out.println(generateLogin());
-        System.out.println(generatePass());
+        System.out.println(generated.generateLogin());
+        System.out.println(generated.generatePass());
 
         Globals.db.insertUser(fname,lname,email,loginName,pass);
-
-    }
-
-    public String generateLogin(){
-
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrst1234567890";
-        StringBuilder randomstring = new StringBuilder();
-        Random rnd = new Random();
-        while (randomstring.length() < 5) {
-            int index = (int) (rnd.nextFloat() * chars.length());
-            randomstring.append(chars.charAt(index));
-        }
-        String saltStr = randomstring.toString();
-        return saltStr;
-
-    }
-
-    public String generatePass(){
-
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrst1234567890";
-        StringBuilder randomstring = new StringBuilder();
-        Random rnd = new Random();
-        while (randomstring.length() < 8) {
-            int index = (int) (rnd.nextFloat() * chars.length());
-            randomstring.append(chars.charAt(index));
-        }
-        String saltStr = randomstring.toString();
-        return saltStr;
 
     }
 
