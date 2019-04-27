@@ -41,6 +41,12 @@ public class AfterLog implements Initializable {
     //generated pass label
     public Label newPass;
 
+    //tabs
+    public Tab tabAcc;
+    public Tab tabIB;
+    public Tab tabCards;
+    public Tab tabTransactions;
+
     ArrayList<Client> clientList;
     ArrayList<Account> accList;
     ArrayList<Card> cardList;
@@ -64,6 +70,10 @@ public class AfterLog implements Initializable {
         afterLogName.setText(name);
         afterLogSurname.setText(surname);
         afterLogPosition.setText(position);
+        tabAcc.setDisable(true);
+        tabIB.setDisable(true);
+        tabCards.setDisable(true);
+        tabTransactions.setDisable(true);
 
     }
 
@@ -119,6 +129,7 @@ public class AfterLog implements Initializable {
         Client selectedUser=Globals.db.selectClientInfo(getIDClient());
 
        // System.out.println(selectedUser);
+        tabAcc.setDisable(false);
 
         clientName.setText(selectedUser.getFirstName());
         clientSurname.setText(selectedUser.getLastName());
@@ -135,6 +146,8 @@ public class AfterLog implements Initializable {
         accNumField.setText(acc.getAccNum());
         amountField.setText(String.valueOf(acc.getMoney()));
 
+        tabIB.setDisable(false);
+        tabCards.setDisable(false);
         fillDropdownCards();
     }
 
