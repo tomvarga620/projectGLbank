@@ -239,6 +239,7 @@ public class Database {
     }
 
     public void insertUser(String fname,String lname,String email,String loginName,String pass){
+
         int id = 0;
         try {
             Connection conn = getConnection();
@@ -267,6 +268,14 @@ public class Database {
             int insert2 = pst2.executeUpdate();
 
             System.out.println("User inserted");
+
+            if(insert2 != 0){
+                System.out.println("dada");
+            }
+            else
+            {
+                System.out.println("dada2");
+            }
 
             conn.close();
 
