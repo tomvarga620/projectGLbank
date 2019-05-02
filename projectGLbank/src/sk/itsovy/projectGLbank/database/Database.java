@@ -27,7 +27,8 @@ public class Database {
     private static final String queryBlockUser = "INSERT INTO loginhistory(idl) VALUES (?)";
     private static final String queryUnblockUser = "INSERT INTO loginhistory(idl,success) VALUES(?,1)";
     private static final String queryLastRecord = "select * from loginhistory where idl = (select id from loginclient where idc = ?)order by UNIX_TIMESTAMP(logDate) desc limit 1";
-
+    private static final String queryCreateAcc = "INSERT INTO account(idc,AccNum,amount) VALUES(?,?,?)";
+    private static final String queryCreateCard = "insert into card(ida,PIN,ExpireM,ExpireY,Active) VALUES(?,?,?,?,?)";
 
     //singleton database
     private static Database db = new Database();
@@ -269,14 +270,6 @@ public class Database {
 
             System.out.println("User inserted");
 
-            if(insert2 != 0){
-                System.out.println("dada");
-            }
-            else
-            {
-                System.out.println("dada2");
-            }
-
             conn.close();
 
         } catch (SQLException e) {
@@ -455,6 +448,44 @@ public class Database {
             isBlocked = resultSet.getString("success");
 
             System.out.println(isBlocked);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createAcc(int idc,String accNum){
+
+        Connection con = getConnection();
+
+        try {
+            PreparedStatement stmnt = con.prepareStatement(queryCreateAcc);
+            stmnt.setInt(1,idc);
+            stmnt.setString(2,accNum);
+            stmnt.setInt(3,0);
+            stmnt.execute();
+            con.close();
+            System.out.println("Account inserted");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createCard(int ida,String PIN){
+
+        Connection con = getConnection();
+
+        try {
+            PreparedStatement stmnt = con.prepareStatement(queryCreateCard);
+            stmnt.setInt(1,ida);
+            stmnt.setString(2,PIN);
+            stmnt.setInt(3,0);
+            stmnt.setInt(4,0);
+            stmnt.setInt(5,1);
+            stmnt.execute();
+            con.close();
+            System.out.println("Card inserted");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

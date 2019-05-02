@@ -6,6 +6,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -36,6 +38,8 @@
                               <Label fx:id="accountIDField" layoutX="27.0" layoutY="60.0" />
                               <Label fx:id="accNumField" layoutX="27.0" layoutY="85.0" />
                               <Label fx:id="amountField" layoutX="27.0" layoutY="110.0" />
+                              <Button fx:id="addAccount" layoutX="189.0" layoutY="17.0" mnemonicParsing="false" onAction="#addAccountAction" text="Add Account" />
+                              <Label fx:id="afterAddAccount" layoutX="200.0" layoutY="60.0" />
                            </children></AnchorPane>
                   </content>
                 </Tab>
@@ -43,9 +47,10 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="206.0" prefWidth="550.0">
                            <children>
-                              <Button fx:id="resetPass" layoutX="46.0" layoutY="39.0" mnemonicParsing="false" onAction="#resetPassAction" text="Reset Password" />
-                              <CheckBox fx:id="blockCheck" layoutX="46.0" layoutY="84.0" mnemonicParsing="false" onAction="#blockCheckAction" text="Block Client" />
-                              <Label fx:id="newPass" layoutX="46.0" layoutY="14.0" />
+                              <Button fx:id="resetPass" layoutX="46.0" layoutY="65.0" mnemonicParsing="false" onAction="#resetPassAction" text="Reset Password" />
+                              <CheckBox fx:id="blockCheck" layoutX="46.0" layoutY="110.0" mnemonicParsing="false" onAction="#blockCheckAction" text="Block Client" />
+                              <Label fx:id="newPass" layoutX="46.0" layoutY="40.0" />
+                              <Label fx:id="ibPassRslt" layoutX="46.0" layoutY="15.0" />
                            </children></AnchorPane>
                     </content>
                   </Tab>
@@ -56,6 +61,10 @@
                               <ComboBox fx:id="comboboxCards" layoutX="28.0" layoutY="14.0" prefWidth="150.0" />
                               <Button fx:id="unblockBtn" layoutX="190.0" layoutY="14.0" mnemonicParsing="false" onAction="#unblockBtnAction" text="Unblock" />
                               <Button fx:id="blockBtn" layoutX="270.0" layoutY="14.0" mnemonicParsing="false" onAction="#blockBtnAction" text="Block" />
+                              <Button fx:id="addCard" layoutX="190.0" layoutY="55.0" mnemonicParsing="false" onAction="#addCardAction" text="Add Card" />
+                              <Label fx:id="cardRslt" layoutX="35.0" layoutY="60.0" />
+                              <Label fx:id="pinHeader" layoutX="35.0" layoutY="96.0" />
+                              <Label fx:id="pinRslt" layoutX="35.0" layoutY="123.0" />
                            </children></AnchorPane>
                     </content>
                   </Tab>
@@ -66,22 +75,27 @@
                   </Tab>
               </tabs>
             </TabPane>
-            <Label fx:id="afterLogName" layoutX="30.0" layoutY="10.0" prefHeight="17.0" prefWidth="82.0">
+            <Label fx:id="afterLogName" layoutX="105.0" layoutY="8.0" prefHeight="17.0" prefWidth="82.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="afterLogSurname" layoutX="30.0" layoutY="30.0" prefHeight="17.0" prefWidth="71.0">
+            <Label fx:id="afterLogSurname" layoutX="105.0" layoutY="28.0" prefHeight="17.0" prefWidth="71.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="afterLogPosition" layoutX="30.0" layoutY="50.0" prefHeight="17.0" prefWidth="80.0">
+            <Label fx:id="afterLogPosition" layoutX="105.0" layoutY="48.0" prefHeight="17.0" prefWidth="80.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
             <Button fx:id="createUserBtn" layoutX="191.0" layoutY="83.0" mnemonicParsing="false" onAction="#createUser" text="Create User" />
+            <ImageView fitHeight="60.0" fitWidth="71.0" layoutX="30.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../person.png" />
+               </image>
+            </ImageView>
          </children></Pane>
    </children>
 </AnchorPane>

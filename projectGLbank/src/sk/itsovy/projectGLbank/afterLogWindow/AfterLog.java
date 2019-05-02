@@ -40,12 +40,19 @@ public class AfterLog implements Initializable {
 
     //generated pass label
     public Label newPass;
+    public Label ibPassRslt;
 
     //tabs
     public Tab tabAcc;
     public Tab tabIB;
     public Tab tabCards;
     public Tab tabTransactions;
+
+    //adding account
+    public Label afterAddAccount;
+    public Label cardRslt;
+    public Label pinHeader;
+    public Label pinRslt;
 
     ArrayList<Client> clientList;
     ArrayList<Account> accList;
@@ -149,6 +156,7 @@ public class AfterLog implements Initializable {
         tabIB.setDisable(false);
         tabCards.setDisable(false);
         fillDropdownCards();
+
     }
 
     public int getIDClient() {
@@ -210,6 +218,23 @@ public class AfterLog implements Initializable {
         System.out.println("test btn");
         String newpass = generated.generatePass();
         Globals.db.resetPass(getIDClient(),newpass);
+        ibPassRslt.setText("Password is reseted, new password is:");
         newPass.setText(newpass);
+
+    }
+
+    public void addAccountAction(ActionEvent actionEvent) {
+        Globals.db.createAcc(getIDClient(),generateAccNum());
+        afterAddAccount.setText("Account added");
+        fillDropdownAccounts();
+    }
+
+    public void addCardAction(ActionEvent actionEvent) {
+        String PIN = generated.generatePIN();
+        Globals.db.createCard(getIDAccount(),PIN);
+        fillDropdownCards();
+        cardRslt.setText("New Card Added");
+        pinHeader.setText("New PIN is:");
+        pinRslt.setText(PIN);
     }
 }

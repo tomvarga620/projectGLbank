@@ -44,4 +44,18 @@ public class Globals {
 
     }
 
+    public String generatePIN(){
+
+        String chars = "1234567890";
+        StringBuilder randomstring = new StringBuilder();
+        Random rnd = new Random();
+        while (randomstring.length() < 4) {
+            int index = (int) (rnd.nextFloat() * chars.length());
+            randomstring.append(chars.charAt(index));
+        }
+        String saltStr = randomstring.toString();
+        return saltStr;
+
+    }
+
 }
