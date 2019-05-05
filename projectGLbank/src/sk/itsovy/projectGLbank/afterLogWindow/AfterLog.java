@@ -1,5 +1,6 @@
 package sk.itsovy.projectGLbank.afterLogWindow;
 
+import com.sun.glass.events.WindowEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,7 +16,10 @@ import sk.itsovy.projectGLbank.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class AfterLog implements Initializable {
@@ -53,6 +57,12 @@ public class AfterLog implements Initializable {
     public Label cardRslt;
     public Label pinHeader;
     public Label pinRslt;
+
+    //transactions
+    public TextField depositText;
+    public TextField withdrawText;
+    public Label addedMoney;
+    public Label deletedMoney;
 
     ArrayList<Client> clientList;
     ArrayList<Account> accList;
@@ -144,6 +154,12 @@ public class AfterLog implements Initializable {
 
         fillDropdownAccounts();
 
+        accountIDField.setText("");
+        accNumField.setText("");
+        amountField.setText("");
+        comboboxCards.getSelectionModel().clearSelection();
+        comboboxCards.getItems().clear();
+
     }
 
     public void AccInfo() throws SQLException {
@@ -155,6 +171,7 @@ public class AfterLog implements Initializable {
 
         tabIB.setDisable(false);
         tabCards.setDisable(false);
+        tabTransactions.setDisable(false);
         fillDropdownCards();
 
     }
@@ -181,6 +198,13 @@ public class AfterLog implements Initializable {
             stage3.setScene(new Scene(root1));
 
             stage3.show();
+
+            stage3.setOnCloseRequest( event ->
+            {
+                System.out.println("CLOSING");
+                fillDropdownClients();
+
+            });
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -220,7 +244,6 @@ public class AfterLog implements Initializable {
         Globals.db.resetPass(getIDClient(),newpass);
         ibPassRslt.setText("Password is reseted, new password is:");
         newPass.setText(newpass);
-
     }
 
     public void addAccountAction(ActionEvent actionEvent) {
@@ -231,10 +254,86 @@ public class AfterLog implements Initializable {
 
     public void addCardAction(ActionEvent actionEvent) {
         String PIN = generated.generatePIN();
-        Globals.db.createCard(getIDAccount(),PIN);
+        int mm = getMonth();
+        int yy = getYear();
+
+        Globals.db.createCard(getIDAccount(),PIN,mm,yy);
         fillDropdownCards();
         cardRslt.setText("New Card Added");
         pinHeader.setText("New PIN is:");
         pinRslt.setText(PIN);
+    }
+
+    public void depositAction(ActionEvent actionEvent) {
+        addedMoney.setText("");
+        String amountTest = depositText.getText();
+
+        if(amountTest.matches("[\\d]+")){
+            System.out.println("num");
+            int id = getIDAccount();
+            double amount = Double.parseDouble(amountTest);
+            Globals.db.depositMoney(id,amount);
+            addedMoney.setText(amount+" € added to your account");
+            depositText.setText("");
+            fillDropdownClients();
+            fillDropdownAccounts();
+            fillDropdownCards();
+        }
+        else
+        {
+            addedMoney.setText("Wrong type format");
+        }
+
+    }
+
+    public void withdrawAction(ActionEvent actionEvent) {
+        deletedMoney.setText("");
+        int id = getIDAccount();
+        String amountTest = withdrawText.getText();
+        if(amountTest.matches("[\\d]+")){
+            System.out.println("num");
+            double actualAmount = accList.get(comboboxAcc.getSelectionModel().getSelectedIndex()).getMoney();
+            double amount = Double.parseDouble(amountTest);
+
+            if((actualAmount-amount) < 0){
+                deletedMoney.setText("You don't have enough money");
+            }
+            else{
+
+                Globals.db.withdrawMoney(id,amount);
+                deletedMoney.setText("You withdrawn"+" € "+amount);
+                fillDropdownClients();
+                fillDropdownAccounts();
+                fillDropdownCards();
+                withdrawText.setText("");
+            }
+        }
+        else
+        {
+            System.out.println("bad");
+            deletedMoney.setText("Wrong type format");
+        }
+
+    }
+
+    public int getMonth(){
+
+        LocalDateTime ldt = LocalDateTime.now().plusYears(4);
+        DateTimeFormatter formmat1 = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
+        String date = ldt.toString();
+        String mm = date.substring(5,7);
+
+        return Integer.parseInt(mm);
+    }
+
+    public int getYear(){
+
+        LocalDateTime ldt = LocalDateTime.now().plusYears(4);
+        DateTimeFormatter formmat1 = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
+        String date = ldt.toString();
+        String yy = date.substring(0,2);
+
+        return Integer.parseInt(yy);
+
     }
 }

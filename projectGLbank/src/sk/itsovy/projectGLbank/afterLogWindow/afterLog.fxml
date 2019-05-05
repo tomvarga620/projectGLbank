@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,7 +19,7 @@
          <children>
             <Button fx:id="logout" layoutX="524.0" layoutY="11.0" mnemonicParsing="false" onAction="#logoutbtn" text="Logout" />
             <ComboBox fx:id="combobox" layoutX="30.0" layoutY="83.0" onAction="#clientInfo" prefWidth="150.0" promptText="Select client" />
-            <TabPane layoutX="30.0" layoutY="130.0" prefHeight="200.0" prefWidth="550.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane layoutX="30.0" layoutY="130.0" prefHeight="251.0" prefWidth="550.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab text="Client">
                   <content>
@@ -70,7 +71,15 @@
                   </Tab>
                   <Tab fx:id="tabTransactions" text="Transactions">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="depositBtn" layoutX="21.0" layoutY="61.0" mnemonicParsing="false" onAction="#depositAction" text="Deposit" />
+                              <Button fx:id="withdrawBtn" layoutX="21.0" layoutY="146.0" mnemonicParsing="false" onAction="#withdrawAction" text="Withdraw" />
+                              <TextField fx:id="depositText" layoutX="21.0" layoutY="25.0" />
+                              <TextField fx:id="withdrawText" layoutX="21.0" layoutY="109.0" />
+                              <Label fx:id="addedMoney" layoutX="105.0" layoutY="66.0" />
+                              <Label fx:id="deletedMoney" layoutX="115.0" layoutY="151.0" />
+                           </children></AnchorPane>
                     </content>
                   </Tab>
               </tabs>

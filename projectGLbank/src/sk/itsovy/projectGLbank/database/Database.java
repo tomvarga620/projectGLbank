@@ -29,6 +29,8 @@ public class Database {
     private static final String queryLastRecord = "select * from loginhistory where idl = (select id from loginclient where idc = ?)order by UNIX_TIMESTAMP(logDate) desc limit 1";
     private static final String queryCreateAcc = "INSERT INTO account(idc,AccNum,amount) VALUES(?,?,?)";
     private static final String queryCreateCard = "insert into card(ida,PIN,ExpireM,ExpireY,Active) VALUES(?,?,?,?,?)";
+    public static final String updateMoney="UPDATE Account set amount=amount+? where id like ?";
+    public static final String withdrawMoney="UPDATE Account set amount=amount-? where id like ?";
 
     //singleton database
     private static Database db = new Database();
@@ -471,7 +473,7 @@ public class Database {
         }
     }
 
-    public void createCard(int ida,String PIN){
+    public void createCard(int ida,String PIN,int MM,int YY){
 
         Connection con = getConnection();
 
@@ -479,8 +481,8 @@ public class Database {
             PreparedStatement stmnt = con.prepareStatement(queryCreateCard);
             stmnt.setInt(1,ida);
             stmnt.setString(2,PIN);
-            stmnt.setInt(3,0);
-            stmnt.setInt(4,0);
+            stmnt.setInt(3,MM);
+            stmnt.setInt(4,YY);
             stmnt.setInt(5,1);
             stmnt.execute();
             con.close();
@@ -490,5 +492,59 @@ public class Database {
             e.printStackTrace();
         }
     }
+
+    public int depositMoney(int id,double money){
+
+        Connection conn = getConnection();
+
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            pst = conn.prepareStatement(updateMoney);
+            pst.setDouble(1,money);
+            pst.setInt(2,id);
+            int rslt= pst.executeUpdate();
+
+            //System.out.println(rslt);
+            System.out.println("Money Added");
+            return rslt;
+
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return 0;
+
+    }
+
+
+    public int withdrawMoney(int id,double money){
+
+        Connection conn = getConnection();
+
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            pst = conn.prepareStatement(withdrawMoney);
+            pst.setDouble(1,money);
+            pst.setInt(2,id);
+            int rslt= pst.executeUpdate();
+
+            //System.out.println(rslt);
+            System.out.println("Money Added");
+            return rslt;
+
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return 0;
+
+    }
+
+
+
 
 }
