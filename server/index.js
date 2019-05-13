@@ -3,17 +3,22 @@ const express = require('express');
 const app = express();
 const database = require('./database');
 const bodyParser = require("body-parser");
-const TokenGenerator = require('uuid-token-generator');
-
-let tokenArr = [];
-
-const tokgen = new TokenGenerator(); 
 
 app.post('/login',function(req,res,callback){
 
 	console.log("Login Service");
-	const token = tokgen.generate();
-	res.status(200).send(token);
+
+	let login = req.body.login;
+	let password = req.body.password
+
+	database.getLogin(login,password, function(result) {
+	res.status(200).send(result);
+
+});
+
+app.post('/logout',function(req,res){
+
+	res.status(200).send();
 
 });
 
