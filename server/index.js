@@ -17,8 +17,18 @@ app.post('/login',function(req,res,callback){
 	let login = req.body.login;
 	let password = req.body.password;
 
+	if(login=="" || password==""){
+	res.status(400).send("Error bad login");
+	}
+
 	database.getLogin(login,password,function(result) {
-	res.status(200).send(result);
+
+	if(result==null){
+		console.log("null test");
+		res.status(400).send("Error login account not found");
+	}else{
+		res.status(200).send(result);
+	}
 
 	});
 
