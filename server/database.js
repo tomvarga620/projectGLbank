@@ -2,6 +2,8 @@ const mysql = require('mysql');
 const TokenGenerator = require('uuid-token-generator');
 const tokgen = new TokenGenerator(); 
 
+let tokens = [];
+
 const getLogin = (login,password,callback) => {
 console.log(login,password);
 	const con = mysql.createConnection({
@@ -30,6 +32,7 @@ console.log(login,password);
 				let obj= new Object();
 				obj.login=login;
 				obj.token= token;
+				tokens.push(obj);
 				let newresult = JSON.stringify(obj);
 				callback(newresult);
 			}
@@ -37,4 +40,19 @@ console.log(login,password);
 	});
 }
 
-module.exports = {getLogin};
+const getLogout = (login,token,callback) => {
+	for(let i=0;i<tokens.length;i++){
+    if((tokens[i].username=login) && (tokens[i].token=token)){
+      tokens.splice(i,1);
+      callback(200);
+      break;
+    }
+    else{
+      callback(401);
+      break;
+    }
+  }
+
+}
+
+module.exports = {getLogin,getLogout};

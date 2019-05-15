@@ -36,7 +36,13 @@ app.post('/login',function(req,res,callback){
 
 app.post('/logout',function(req,res){
 
-	res.status(200).send();
+	let login = req.body.login;
+	let token = req.body.token;
+
+	//res.status(200).send();
+	database.getLogout(login,token,function(result){
+		res.status(result).send("");
+	});
 
 });
 
