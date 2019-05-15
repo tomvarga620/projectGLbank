@@ -46,4 +46,18 @@ app.post('/logout',function(req,res){
 
 });
 
+
+app.post('/userinfo',function(req,res){
+
+	let login = req.body.login;
+	let token = req.body.token;
+
+	//res.status(200).send();
+	database.getUserInfo(login,token,function(result){
+		
+	});
+
+});
+
+
 app.listen(3000);
