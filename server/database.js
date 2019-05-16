@@ -68,7 +68,7 @@ const getUserInfo = (login,token,callback) => {
 
 	con.connect(function(err){
 		if(err) throw err 
-		let sql = "select client.fname,client.lname,client.email from client inner join loginclient on loginclient.id = client.id where login like"+login+";";
+		let sql = "select client.fname,client.lname,client.email from client inner join loginclient on loginclient.id = client.id where login like'"+login+"';";
 		console.log("It works");
 		con.query(sql,(err,result) => {	 
 		if(err) throw err; 
