@@ -93,4 +93,40 @@ const getUserInfo = (login,token,callback) => {
 	});
 }
 
-module.exports = {getLogin,getLogout,getUserInfo};
+
+const getAccInfo = (login,token,accNum,callback) => {
+	const con = mysql.createConnection({
+		host: "localhost",
+		user: "root",
+		password: "Dadada5",
+		port: "3306",
+		database: "glbank"
+
+	});
+
+	con.connect(function(err){
+		if(err) throw err 
+		let sql = "select * from account where AccNum like '"+accNum+"';";
+		console.log("It works");
+		con.query(sql,(err,result) => {	 
+		if(err) throw err; 
+			if(result.length==0){
+				console.log("User"+login+' is not defined');
+				//return null;
+				let rslt = null;
+				callback(rslt);
+			}else{
+				// {"FirstName","LastName","Mail","ID"}
+				console.log("User"+login+" is in the database");
+				let obj= new Object();
+				obj.id=result[0].id;
+				obj.amount=result[0].amount;
+				let newresult = JSON.stringify(obj);
+				console.log(newresult);
+				callback(newresult);
+			}
+		});
+	});
+}
+
+module.exports = {getLogin,getLogout,getUserInfo,getAccInfo};

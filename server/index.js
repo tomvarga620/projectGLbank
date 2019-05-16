@@ -54,10 +54,36 @@ app.post('/userinfo',function(req,res){
 
 	//res.status(200).send();
 	database.getUserInfo(login,token,function(result){
-		
+		res.status(200).send(result);
 	});
 
 });
 
+/*
+app.post('/accounts',function(req,res){
+
+	let login = req.body.login;
+	let token = req.body.token;
+
+	//res.status(200).send();
+	database.getUserInfo(login,token,function(result){
+		res.status(200).send(result);
+	});
+
+});
+*/
+
+app.post('/accinfo',function(req,res){
+
+	let login = req.body.login;
+	let token = req.body.token;
+	let accNum = req.body.accNum;
+
+	//res.status(200).send();
+	database.getAccInfo(login,token,accNum,function(result){
+		res.status(200).send(result);
+	});
+
+});
 
 app.listen(3000);
