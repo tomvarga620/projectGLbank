@@ -32,7 +32,9 @@ console.log(login,password);
 				let obj= new Object();
 				obj.login=login;
 				obj.token= token;
+				tokens=tokens.filter(person => person.login != login);
 				tokens.push(obj);
+				console.log(tokens);
 				let newresult = JSON.stringify(obj);
 				callback(newresult);
 			}
@@ -41,16 +43,14 @@ console.log(login,password);
 }
 
 const getLogout = (login,token,callback) => {
-	for(let i=0;i<tokens.length;i++){
-    if((tokens[i].username=login) && (tokens[i].token=token)){
-      tokens.splice(i,1);
-      callback(200);
-      break;
-    }
-    else{
-      callback(401);
-      break;
-    }
+if(tokens.find(person => (person.login == login && person.token==token))){
+    tokens=tokens.filter(person => (person.login != login && person.token !=token));
+    callback(200);
+    console.log(tokens);
+  }
+  else{
+    callback(401);
+    console.log(tokens);
   }
 
 }
@@ -111,13 +111,13 @@ const getAccInfo = (login,token,accNum,callback) => {
 		con.query(sql,(err,result) => {	 
 		if(err) throw err; 
 			if(result.length==0){
-				console.log("User"+login+' is not defined');
+				console.log("Account is not in the database");
 				//return null;
 				let rslt = null;
 				callback(rslt);
 			}else{
 				// {"FirstName","LastName","Mail","ID"}
-				console.log("User"+login+" is in the database");
+				console.log("Account is in the database");
 				let obj= new Object();
 				obj.id=result[0].id;
 				obj.amount=result[0].amount;

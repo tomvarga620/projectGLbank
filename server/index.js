@@ -41,6 +41,7 @@ app.post('/logout',function(req,res){
 
 	//res.status(200).send();
 	database.getLogout(login,token,function(result){
+		console.log(result);
 		res.status(result).send("");
 	});
 
