@@ -92,4 +92,79 @@ app.post('/accinfo',function(req,res){
 
 });
 
+app.post('/transhistory',function(req,res){
+
+	let login = req.body.login;
+	let idAcc = req.body.idAcc;
+	let token = req.body.token;
+
+	//res.status(200).send();
+	database.getTransHistory(login,idAcc,token,function(result){
+
+		if(result==null){
+			res.status(400).send("Wrong credentials");
+		}else{
+			res.status(200).send(result);
+		}
+	});
+
+});
+
+app.post('/cards',function(req,res){
+
+	let login = req.body.login;
+	let idAcc = req.body.idAcc;
+	let token = req.body.token;
+
+	//res.status(200).send();
+	database.getCards(login,idAcc,token,function(result){
+
+		if(result==null){
+			res.status(400).send("Wrong credentials");
+		}else{
+			res.status(200).send(result);
+		}
+	});
+
+});
+
+
+app.post('/cardinfo',function(req,res){
+
+	let login = req.body.login;
+	let idCard = req.body.idCard;
+	let token = req.body.token;
+
+	//res.status(200).send();
+	database.getCardInfo(login,idCard,token,function(result){
+
+		if(result==null){
+			res.status(400).send("Wrong credentials");
+		}else{
+			res.status(200).send(result);
+		}
+	});
+
+});
+
+
+app.post('/cardtrans',function(req,res){
+
+	let login = req.body.login;
+	let idCard = req.body.idCard;
+	let token = req.body.token;
+
+	//res.status(200).send();
+	database.getCardTransaction(login,idCard,token,function(result){
+
+		if(result==null){
+			res.status(400).send("Wrong credentials");
+		}else{
+			res.status(200).send(result);
+		}
+	});
+
+});
+
+
 app.listen(3000);
