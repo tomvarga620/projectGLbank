@@ -82,7 +82,12 @@ app.post('/accinfo',function(req,res){
 
 	//res.status(200).send();
 	database.getAccInfo(login,token,accNum,function(result){
-		res.status(200).send(result);
+
+		if(result==null){
+			res.status(400).send("Wrong credentials");
+		}else{
+			res.status(200).send(result);
+		}
 	});
 
 });

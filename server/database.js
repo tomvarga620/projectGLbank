@@ -104,10 +104,52 @@ const getAccInfo = (login,token,accNum,callback) => {
 
 	});
 
+	let objGetted = new Object();
+	objGetted.login=login;
+	objGetted.token=token;
+	console.log(objGetted);
+	console.log("It works"+"	"+objGetted.login+"	"+objGetted.token);
+
+	for(let i=0;i<tokens.length;i++){
+		console.log("it work")
+		if(tokens[i].login==objGetted.login && tokens[i].token==objGetted.token){
+			con.connect(function(err){
+			if(err) throw err 
+			let sql = "select * from account where AccNum like '"+accNum+"';";
+			con.query(sql,(err,result) => {	 
+			if(err) throw err; 
+				if(result.length==0){
+					console.log("Account is not in the database");
+					//return null;
+					let rslt = null;
+					callback(rslt);
+				}else{
+					// {"FirstName","LastName","Mail","ID"}
+					console.log("Account is in the database");
+					let obj= new Object();
+					obj.id=result[0].id;
+					obj.amount=result[0].amount;
+					let newresult = JSON.stringify(obj);
+					console.log(newresult);
+					callback(newresult);
+				}
+			});
+		});
+
+		break;
+
+		}else{
+			console.log("bad credentials");
+			let newresult = null;
+			callback(newresult);
+			break;
+		}
+
+	}
+	/*
 	con.connect(function(err){
 		if(err) throw err 
 		let sql = "select * from account where AccNum like '"+accNum+"';";
-		console.log("It works");
 		con.query(sql,(err,result) => {	 
 		if(err) throw err; 
 			if(result.length==0){
@@ -126,7 +168,7 @@ const getAccInfo = (login,token,accNum,callback) => {
 				callback(newresult);
 			}
 		});
-	});
+	});*/
 }
 
 module.exports = {getLogin,getLogout,getUserInfo,getAccInfo};
