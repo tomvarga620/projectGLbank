@@ -62,7 +62,7 @@ app.post('/userinfo',function(req,res){
 
 });
 
-
+//funguje
 app.post('/accounts',function(req,res){
 
 	let login = req.body.login;
@@ -71,11 +71,16 @@ app.post('/accounts',function(req,res){
 
 	//res.status(200).send();
 	database.getAccounts(login,id,token,function(result){
-		res.status(200).send(result);
+		if(result==null){
+			res.status(400).send("Wrong credentials");
+		}else{
+			res.status(200).send(result);
+		}
 	});
 
 });
 
+//funguje
 app.post('/accinfo',function(req,res){
 
 	let login = req.body.login;
@@ -94,6 +99,7 @@ app.post('/accinfo',function(req,res){
 
 });
 
+//funguje
 app.post('/transhistory',function(req,res){
 
 	let login = req.body.login;
@@ -112,6 +118,7 @@ app.post('/transhistory',function(req,res){
 
 });
 
+//funguje
 app.post('/cards',function(req,res){
 
 	let login = req.body.login;
@@ -130,7 +137,7 @@ app.post('/cards',function(req,res){
 
 });
 
-
+//funguje
 app.post('/cardinfo',function(req,res){
 
 	let login = req.body.login;
@@ -149,7 +156,7 @@ app.post('/cardinfo',function(req,res){
 
 });
 
-
+//funguje
 app.post('/cardtrans',function(req,res){
 
 	let login = req.body.login;

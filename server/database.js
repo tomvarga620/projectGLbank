@@ -258,7 +258,7 @@ const getCards = (login,idAcc,token,callback) => {
 		if(tokens[i].login==objGetted.login && tokens[i].token==objGetted.token){
 			con.connect(function(err){
 			if(err) throw err 
-			let sql = "select * from card where ida like'"+idAcc+"';";
+			let sql = "select id from card where ida like'"+idAcc+"';";
 			con.query(sql,(err,result) => {	 
 			if(err) throw err; 
 				if(result.length==0){
@@ -269,12 +269,7 @@ const getCards = (login,idAcc,token,callback) => {
 				}else{
 					// {"FirstName","LastName","Mail","ID"}
 					console.log("Account is in the database");
-					let obj= new Object();
-					console.log(result.length);
-					for(let i = 0;i<result.length;i++){
-						obj[i].id=result[i].id;
-					}
-					let newresult = JSON.stringify(obj);
+					let newresult = JSON.stringify(result);
 					console.log(newresult);
 					callback(newresult);
 				}
@@ -315,7 +310,7 @@ const getCardInfo = (login,idCard,token,callback) => {
 		if(tokens[i].login==objGetted.login && tokens[i].token==objGetted.token){
 			con.connect(function(err){
 			if(err) throw err 
-			let sql = "select * from card where ida like'"+idCard+"';";
+			let sql = "select Active,ExpireM,ExpireY from card where id like'"+idCard+"';";
 			con.query(sql,(err,result) => {	 
 			if(err) throw err; 
 				if(result.length==0){
@@ -326,14 +321,7 @@ const getCardInfo = (login,idCard,token,callback) => {
 				}else{
 					// {"FirstName","LastName","Mail","ID"}
 					console.log("Account is in the database");
-					let obj= new Object();
-					console.log(result.length);
-					for(let i = 0;i<result.length;i++){
-						obj[i].active=result[i].Active;
-						obj[i].expireM=result[i].ExpireM;
-						obj[i].expireY=result[i].ExpireY;
-					}
-					let newresult = JSON.stringify(obj);
+					let newresult = JSON.stringify(result);
 					console.log(newresult);
 					callback(newresult);
 				}
@@ -385,13 +373,7 @@ const getCardTransaction = (login,idCard,token,callback) => {
 				}else{
 					// {"FirstName","LastName","Mail","ID"}
 					console.log("Account is in the database");
-					let obj= new Object();
-					console.log(result.length);
-					for(let i = 0;i<result.length;i++){
-						obj[i].transamount=result[i].TransAmount;
-						obj[i].transDate=result[i].TransDate;
-					}
-					let newresult = JSON.stringify(obj);
+					let newresult = JSON.stringify(result);
 					console.log(newresult);
 					callback(newresult);
 				}
