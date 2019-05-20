@@ -9,7 +9,7 @@ app.use(function(req, res, next) {
     next();
   });  
 
-
+//funguje
 app.post('/login',function(req,res,callback){
 
 	console.log("Login Service");
@@ -34,6 +34,7 @@ app.post('/login',function(req,res,callback){
 
 });
 
+//funguje
 app.post('/logout',function(req,res){
 
 	let login = req.body.login;
@@ -48,6 +49,7 @@ app.post('/logout',function(req,res){
 });
 
 
+//funguje
 app.post('/userinfo',function(req,res){
 
 	let login = req.body.login;
@@ -60,19 +62,19 @@ app.post('/userinfo',function(req,res){
 
 });
 
-/*
+
 app.post('/accounts',function(req,res){
 
 	let login = req.body.login;
+	let id=req.body.id;
 	let token = req.body.token;
 
 	//res.status(200).send();
-	database.getUserInfo(login,token,function(result){
+	database.getAccounts(login,id,token,function(result){
 		res.status(200).send(result);
 	});
 
 });
-*/
 
 app.post('/accinfo',function(req,res){
 

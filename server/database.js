@@ -94,6 +94,39 @@ const getUserInfo = (login,token,callback) => {
 }
 
 
+const getAccounts = (login,id,token,callback) => {
+	const con = mysql.createConnection({
+		host: "localhost",
+		user: "root",
+		password: "Dadada5",
+		port: "3306",
+		database: "glbank"
+
+	});
+
+	con.connect(function(err){
+		if(err) throw err 
+		let sql = "select AccNum from account where idc like'"+id+"';";
+		console.log("It works");
+		con.query(sql,(err,result) => {	 
+		if(err) throw err; 
+			if(result.length==0){
+				console.log("User"+login+' is not defined');
+				//return null;
+				let rslt = null;
+				callback(rslt);
+			}else{
+				// {"FirstName","LastName","Mail","ID"}
+				console.log("User"+login+" is in the database");
+				let newresult = JSON.stringify(result);
+				console.log(newresult);
+				callback(newresult);
+			}
+		});
+	});
+}
+
+
 const getAccInfo = (login,token,accNum,callback) => {
 	const con = mysql.createConnection({
 		host: "localhost",
@@ -378,4 +411,4 @@ const getCardTransaction = (login,idCard,token,callback) => {
 }
 
 
-module.exports = {getLogin,getLogout,getUserInfo,getAccInfo,getTransHistory,getCards,getCardInfo,getCardTransaction};
+module.exports = {getLogin,getLogout,getUserInfo,getAccounts,getAccInfo,getTransHistory,getCards,getCardInfo,getCardTransaction};
