@@ -175,5 +175,56 @@ app.post('/cardtrans',function(req,res){
 
 });
 
+/*
+/changePassword 
+prijma: JSON{"username","token","oldpassword","newpassword"}
+vracia: 200 -
+	401 - JSON
+  403 -
+  
+/blockcard
+prijma: JSON{"username","token","idCard"}
+vracia: 200 
+  401 - JSON{"wrong token"}
+  403 - nenajdena karta
+*/
+
+app.post('/changepassword',function(req,res){
+
+	let login = req.body.login;
+	let token = req.body.token;
+	let oldpassword = req.body.oldpassword;
+	let newpassword = req.body.newpassword;
+
+	//res.status(200).send();
+	database.getChangePass(login,token,oldpassword,newpassword,function(result){
+
+		if(result==null){
+			res.status(400).send("Wrong credentials");
+		}else{
+			res.status(200).send(result);
+		}
+	});
+
+});
+
+
+app.post('/blockcard',function(req,res){
+
+	let login = req.body.login;
+	let token = req.body.token;
+	let idCard = req.body.idCard;
+
+	//res.status(200).send();
+	database.getBlockCard(login,token,idCard,function(result){
+
+		if(result==null){
+			res.status(400).send("Wrong credentials");
+		}else{
+			res.status(200).send(result);
+		}
+	});
+
+});
 
 app.listen(3000);

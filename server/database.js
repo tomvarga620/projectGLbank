@@ -7,11 +7,11 @@ let tokens = [];
 const getLogin = (login,password,callback) => {
 console.log(login,password);
 	const con = mysql.createConnection({
-		host: "localhost",
-		user: "root",
-		password: "Dadada5",
-		port: "3306",
-		database: "glbank"
+		host: "itsovy.sk",
+    user: "glbank",
+    password: "password",
+    database: "glbank",
+    port: "3306"
 
 	});
 
@@ -58,11 +58,11 @@ if(tokens.find(person => (person.login == login && person.token==token))){
 
 const getUserInfo = (login,token,callback) => {
 	const con = mysql.createConnection({
-		host: "localhost",
-		user: "root",
-		password: "Dadada5",
-		port: "3306",
-		database: "glbank"
+		host: "itsovy.sk",
+    user: "glbank",
+    password: "password",
+    database: "glbank",
+    port: "3306"
 
 	});
 
@@ -96,11 +96,11 @@ const getUserInfo = (login,token,callback) => {
 
 const getAccounts = (login,id,token,callback) => {
 	const con = mysql.createConnection({
-		host: "localhost",
-		user: "root",
-		password: "Dadada5",
-		port: "3306",
-		database: "glbank"
+		host: "itsovy.sk",
+    user: "glbank",
+    password: "password",
+    database: "glbank",
+    port: "3306"
 
 	});
 
@@ -129,11 +129,11 @@ const getAccounts = (login,id,token,callback) => {
 
 const getAccInfo = (login,token,accNum,callback) => {
 	const con = mysql.createConnection({
-		host: "localhost",
-		user: "root",
-		password: "Dadada5",
-		port: "3306",
-		database: "glbank"
+		host: "itsovy.sk",
+    user: "glbank",
+    password: "password",
+    database: "glbank",
+    port: "3306"
 
 	});
 
@@ -184,11 +184,11 @@ const getAccInfo = (login,token,accNum,callback) => {
 const getTransHistory = (login,idAcc,token,callback) => {
 	const con = mysql.createConnection({
 
-		host: "localhost",
-		user: "root",
-		password: "Dadada5",
-		port: "3306",
-		database: "glbank"
+		host: "itsovy.sk",
+    user: "glbank",
+    password: "password",
+    database: "glbank",
+    port: "3306"
 
 	});
 
@@ -240,12 +240,12 @@ const getTransHistory = (login,idAcc,token,callback) => {
 const getCards = (login,idAcc,token,callback) => {
 	const con = mysql.createConnection({
 
-		host: "localhost",
-		user: "root",
-		password: "Dadada5",
-		port: "3306",
-		database: "glbank"
-
+		host: "itsovy.sk",
+    user: "glbank",
+    password: "password",
+    database: "glbank",
+		port: "3306"
+		
 	});
 
 	let objGetted = new Object();
@@ -292,11 +292,11 @@ const getCards = (login,idAcc,token,callback) => {
 const getCardInfo = (login,idCard,token,callback) => {
 	const con = mysql.createConnection({
 
-		host: "localhost",
-		user: "root",
-		password: "Dadada5",
-		port: "3306",
-		database: "glbank"
+		host: "itsovy.sk",
+    user: "glbank",
+    password: "password",
+    database: "glbank",
+    port: "3306"
 
 	});
 
@@ -344,11 +344,62 @@ const getCardInfo = (login,idCard,token,callback) => {
 const getCardTransaction = (login,idCard,token,callback) => {
 	const con = mysql.createConnection({
 
-		host: "localhost",
-		user: "root",
-		password: "Dadada5",
-		port: "3306",
-		database: "glbank"
+		host: "itsovy.sk",
+    user: "glbank",
+    password: "password",
+    database: "glbank",
+    port: "3306"
+
+	});
+
+	let objGetted = new Object();
+	objGetted.login=login;
+	objGetted.token=token;
+	console.log(objGetted);
+	console.log("It works"+"	"+objGetted.login+"	"+objGetted.token);
+
+	for(let i=0;i<tokens.length;i++){
+		if(tokens[i].login==objGetted.login && tokens[i].token==objGetted.token){
+			con.connect(function(err){
+			if(err) throw err 
+			let sql = "select * from cardtrans where idCard like'"+idCard+"';";
+			con.query(sql,(err,result) => {	 
+			if(err) throw err; 
+				if(result.length==0){
+					console.log("Account is not in the database");
+					//return null;
+					let rslt = null;
+					callback(rslt);
+				}else{
+					// {"FirstName","LastName","Mail","ID"}
+					console.log("Account is in the database");
+					let newresult = JSON.stringify(result);
+					console.log(newresult);
+					callback(newresult);
+				}
+			});
+		});
+
+		break;
+
+		}else{
+			console.log("bad credentials");
+			let newresult = null;
+			callback(newresult);
+			break;
+		}
+
+	}
+}
+
+const getCardTransaction = (login,idCard,token,callback) => {
+	const con = mysql.createConnection({
+
+		host: "itsovy.sk",
+    user: "glbank",
+    password: "password",
+    database: "glbank",
+    port: "3306"
 
 	});
 
@@ -393,4 +444,56 @@ const getCardTransaction = (login,idCard,token,callback) => {
 }
 
 
-module.exports = {getLogin,getLogout,getUserInfo,getAccounts,getAccInfo,getTransHistory,getCards,getCardInfo,getCardTransaction};
+const getBlockCard = (login,token,idCard,callback) => {
+	const con = mysql.createConnection({
+
+		host: "itsovy.sk",
+    user: "glbank",
+    password: "password",
+    database: "glbank",
+    port: "3306"
+
+	});
+
+	let objGetted = new Object();
+	objGetted.login=login;
+	objGetted.token=token;
+	console.log(objGetted);
+	console.log("It works"+"	"+objGetted.login+"	"+objGetted.token);
+
+	for(let i=0;i<tokens.length;i++){
+		if(tokens[i].login==objGetted.login && tokens[i].token==objGetted.token){
+			con.connect(function(err){
+			if(err) throw err 
+			let sql = "select * from cardtrans where idCard like'"+idCard+"';";
+			con.query(sql,(err,result) => {	 
+			if(err) throw err; 
+				if(result.length==0){
+					console.log("Account is not in the database");
+					//return null;
+					let rslt = null;
+					callback(rslt);
+				}else{
+					// {"FirstName","LastName","Mail","ID"}
+					console.log("Account is in the database");
+					let newresult = JSON.stringify(result);
+					console.log(newresult);
+					callback(newresult);
+				}
+			});
+		});
+
+		break;
+
+		}else{
+			console.log("bad credentials");
+			let newresult = null;
+			callback(newresult);
+			break;
+		}
+
+	}
+}
+
+
+module.exports = {getLogin,getLogout,getUserInfo,getAccounts,getAccInfo,getTransHistory,getCards,getCardInfo,getCardTransaction,getChangePass,getBlockCard};
