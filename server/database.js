@@ -392,7 +392,7 @@ const getCardTransaction = (login,idCard,token,callback) => {
 	}
 }
 
-const getCardTransaction = (login,idCard,token,callback) => {
+const getChangePass = (login,token,oldpassword,newpassword,callback) => {
 	const con = mysql.createConnection({
 
 		host: "itsovy.sk",
@@ -413,7 +413,8 @@ const getCardTransaction = (login,idCard,token,callback) => {
 		if(tokens[i].login==objGetted.login && tokens[i].token==objGetted.token){
 			con.connect(function(err){
 			if(err) throw err 
-			let sql = "select * from cardtrans where idCard like'"+idCard+"';";
+			//"SELECT id,login,password FROM loginclient "+"WHERE login LIKE '"+login+"' "+"AND password like '"+password+"';";
+			let sql = "update loginclient set password = '"+newpassword+"' where login like '"+login+"'' and password like "+oldpassword+"';";
 			con.query(sql,(err,result) => {	 
 			if(err) throw err; 
 				if(result.length==0){
@@ -447,7 +448,7 @@ const getCardTransaction = (login,idCard,token,callback) => {
 const getBlockCard = (login,token,idCard,callback) => {
 	const con = mysql.createConnection({
 
-		host: "itsovy.sk",
+	host: "itsovy.sk",
     user: "glbank",
     password: "password",
     database: "glbank",
@@ -465,7 +466,7 @@ const getBlockCard = (login,token,idCard,callback) => {
 		if(tokens[i].login==objGetted.login && tokens[i].token==objGetted.token){
 			con.connect(function(err){
 			if(err) throw err 
-			let sql = "select * from cardtrans where idCard like'"+idCard+"';";
+			let sql = "update card set Active = 1 where id like '"+idCard+"';";
 			con.query(sql,(err,result) => {	 
 			if(err) throw err; 
 				if(result.length==0){
