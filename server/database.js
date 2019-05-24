@@ -395,7 +395,7 @@ const getCardTransaction = (login,idCard,token,callback) => {
 const getChangePass = (login,token,oldpassword,newpassword,callback) => {
 	const con = mysql.createConnection({
 
-		host: "itsovy.sk",
+	host: "itsovy.sk",
     user: "glbank",
     password: "password",
     database: "glbank",
@@ -425,7 +425,7 @@ const getChangePass = (login,token,oldpassword,newpassword,callback) => {
 				}else{
 					// {"FirstName","LastName","Mail","ID"}
 					console.log("Account is in the database");
-					let newresult = JSON.stringify(result);
+					let newresult = JSON.stringify("Password is changed");
 					console.log(newresult);
 					callback(newresult);
 				}
@@ -466,7 +466,7 @@ const getBlockCard = (login,token,idCard,callback) => {
 		if(tokens[i].login==objGetted.login && tokens[i].token==objGetted.token){
 			con.connect(function(err){
 			if(err) throw err 
-			let sql = "update card set Active = 1 where id like '"+idCard+"';";
+			let sql = "update card set Active = '"+0+"' where id like '"+idCard+"';";
 			con.query(sql,(err,result) => {	 
 			if(err) throw err; 
 				if(result.length==0){
@@ -477,7 +477,7 @@ const getBlockCard = (login,token,idCard,callback) => {
 				}else{
 					// {"FirstName","LastName","Mail","ID"}
 					console.log("Account is in the database");
-					let newresult = JSON.stringify(result);
+					let newresult = JSON.stringify("Card blocked");
 					console.log(newresult);
 					callback(newresult);
 				}
