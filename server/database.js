@@ -7,7 +7,8 @@ let tokens = [];
 const getLogin = (login,password,callback) => {
 console.log(login,password);
 	const con = mysql.createConnection({
-		host: "itsovy.sk",
+	
+	host: "itsovy.sk",
     user: "glbank",
     password: "password",
     database: "glbank",
@@ -17,13 +18,12 @@ console.log(login,password);
 
 	con.connect(function(err){
 		if(err) throw err 
-		let sql = "SELECT id,login,password FROM loginclient "+"WHERE login LIKE '"+login+"' "+"AND password like '"+password+"';";
+		let sql = "SELECT id,login,password FROM loginclient "+"WHERE login LIKE '"+login+"' "+"AND password like md5('"+password+"');";
 		console.log("It works");
 		con.query(sql,(err,result) => {	 
 		if(err) throw err; 
 			if(result.length==0){
 				console.log("User"+login+' is not defined');
-				//return null;
 				let rslt = null;
 				callback(rslt);
 			}else{
@@ -58,7 +58,8 @@ if(tokens.find(person => (person.login == login && person.token==token))){
 
 const getUserInfo = (login,token,callback) => {
 	const con = mysql.createConnection({
-		host: "itsovy.sk",
+
+	host: "itsovy.sk",
     user: "glbank",
     password: "password",
     database: "glbank",
@@ -74,11 +75,11 @@ const getUserInfo = (login,token,callback) => {
 		if(err) throw err; 
 			if(result.length==0){
 				console.log("User"+login+' is not defined');
-				//return null;
+
 				let rslt = null;
 				callback(rslt);
 			}else{
-				// {"FirstName","LastName","Mail","ID"}
+
 				console.log("User"+login+" is in the database");
 				let obj= new Object();
 				obj.FirstName=result[0].fname;
@@ -96,7 +97,8 @@ const getUserInfo = (login,token,callback) => {
 
 const getAccounts = (login,id,token,callback) => {
 	const con = mysql.createConnection({
-		host: "itsovy.sk",
+
+	host: "itsovy.sk",
     user: "glbank",
     password: "password",
     database: "glbank",
@@ -112,11 +114,9 @@ const getAccounts = (login,id,token,callback) => {
 		if(err) throw err; 
 			if(result.length==0){
 				console.log("User"+login+' is not defined');
-				//return null;
 				let rslt = null;
 				callback(rslt);
 			}else{
-				// {"FirstName","LastName","Mail","ID"}
 				console.log("User"+login+" is in the database");
 				let newresult = JSON.stringify(result);
 				console.log(newresult);
@@ -129,7 +129,8 @@ const getAccounts = (login,id,token,callback) => {
 
 const getAccInfo = (login,token,accNum,callback) => {
 	const con = mysql.createConnection({
-		host: "itsovy.sk",
+
+	host: "itsovy.sk",
     user: "glbank",
     password: "password",
     database: "glbank",
@@ -153,11 +154,9 @@ const getAccInfo = (login,token,accNum,callback) => {
 			if(err) throw err; 
 				if(result.length==0){
 					console.log("Account is not in the database");
-					//return null;
 					let rslt = null;
 					callback(rslt);
 				}else{
-					// {"FirstName","LastName","Mail","ID"}
 					console.log("Account is in the database");
 					let obj= new Object();
 					obj.id=result[0].id;
@@ -184,7 +183,7 @@ const getAccInfo = (login,token,accNum,callback) => {
 const getTransHistory = (login,idAcc,token,callback) => {
 	const con = mysql.createConnection({
 
-		host: "itsovy.sk",
+	host: "itsovy.sk",
     user: "glbank",
     password: "password",
     database: "glbank",
@@ -207,11 +206,9 @@ const getTransHistory = (login,idAcc,token,callback) => {
 			if(err) throw err; 
 				if(result.length==0){
 					console.log("Account is not in the database");
-					//return null;
 					let rslt = null;
 					callback(rslt);
 				}else{
-					// {"FirstName","LastName","Mail","ID"}
 					console.log("Account is in the database");
 					let obj= new Object();
 					obj.transAmout=result[0].TransAmout;
@@ -240,11 +237,11 @@ const getTransHistory = (login,idAcc,token,callback) => {
 const getCards = (login,idAcc,token,callback) => {
 	const con = mysql.createConnection({
 
-		host: "itsovy.sk",
+	host: "itsovy.sk",
     user: "glbank",
     password: "password",
     database: "glbank",
-		port: "3306"
+	port: "3306"
 		
 	});
 
@@ -263,11 +260,9 @@ const getCards = (login,idAcc,token,callback) => {
 			if(err) throw err; 
 				if(result.length==0){
 					console.log("Account is not in the database");
-					//return null;
 					let rslt = null;
 					callback(rslt);
 				}else{
-					// {"FirstName","LastName","Mail","ID"}
 					console.log("Account is in the database");
 					let newresult = JSON.stringify(result);
 					console.log(newresult);
@@ -315,11 +310,9 @@ const getCardInfo = (login,idCard,token,callback) => {
 			if(err) throw err; 
 				if(result.length==0){
 					console.log("Account is not in the database");
-					//return null;
 					let rslt = null;
 					callback(rslt);
 				}else{
-					// {"FirstName","LastName","Mail","ID"}
 					console.log("Account is in the database");
 					let newresult = JSON.stringify(result);
 					console.log(newresult);
@@ -408,22 +401,20 @@ const getChangePass = (login,token,oldpassword,newpassword,callback) => {
 	objGetted.token=token;
 	console.log(objGetted);
 	console.log("It works"+"	"+objGetted.login+"	"+objGetted.token);
+	console.log(login+"	"+token+" "+oldpassword+" "+newpassword);
 
 	for(let i=0;i<tokens.length;i++){
 		if(tokens[i].login==objGetted.login && tokens[i].token==objGetted.token){
 			con.connect(function(err){
 			if(err) throw err 
-			//"SELECT id,login,password FROM loginclient "+"WHERE login LIKE '"+login+"' "+"AND password like '"+password+"';";
-			let sql = "update loginclient set password = '"+newpassword+"' where login like '"+login+"'' and password like "+oldpassword+"';";
+			let sql = "update loginclient set password = md5('"+newpassword+"') where login like '"+login+"' and password like md5('"+oldpassword+"');";
 			con.query(sql,(err,result) => {	 
 			if(err) throw err; 
 				if(result.length==0){
 					console.log("Account is not in the database");
-					//return null;
 					let rslt = null;
 					callback(rslt);
 				}else{
-					// {"FirstName","LastName","Mail","ID"}
 					console.log("Account is in the database");
 					let newresult = JSON.stringify("Password is changed");
 					console.log(newresult);
@@ -471,11 +462,9 @@ const getBlockCard = (login,token,idCard,callback) => {
 			if(err) throw err; 
 				if(result.length==0){
 					console.log("Account is not in the database");
-					//return null;
 					let rslt = null;
 					callback(rslt);
 				}else{
-					// {"FirstName","LastName","Mail","ID"}
 					console.log("Account is in the database");
 					let newresult = JSON.stringify("Card blocked");
 					console.log(newresult);
