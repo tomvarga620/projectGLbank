@@ -32,3 +32,13 @@ padding-top: 0.5%;
 height:15px;
 
 }
+
+#form {
+	/*background:red;*/
+	height:100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+
+}
