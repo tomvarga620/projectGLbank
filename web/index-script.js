@@ -15,7 +15,7 @@ $(document).ready(() => {
 		      type: "POST",
 		      contentType: "application/json; charset=utf-8",
 		      url: "http://localhost:3000/login",
-		      data: "{'login':'"+userName.val()+"','data2':'"+pass.val()+"'}",
+		      data: "{\"login\":\""+userName.val()+"\",\"password\":\""+pass.val()+"\"}",
 		      success: function (result) {
 		           console.log("it works");
 		      }
