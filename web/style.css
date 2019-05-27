@@ -33,12 +33,35 @@ height:15px;
 
 }
 
-#form {
-	/*background:red;*/
+#formWrap {
+	background:red;
 	height:100%;
+	width:25%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+
+}
+
+
+#form {
+	background:green;
+	height:60%;
+	width:100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+
+}
+
+.upBar {
+	
+	width:100%;
+	height:15%;
+	min-height:80px;
+	background:black;
+	align-self:flex-start;
 
 }
