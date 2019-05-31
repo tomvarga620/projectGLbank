@@ -5,6 +5,7 @@ height:100%;
 width:100%;
 margin:0;
 padding: 0;
+background:#E9E9E9;
 
 }
 
@@ -31,7 +32,9 @@ padding-top: 0.5%;
 
 height:30px;
 width:250px;
-margin-top:6%;
+margin-top:9%;
+border:2.5px solid #D7D7D7;
+border-radius:6px;
 
 }
 
@@ -39,16 +42,21 @@ margin-top:6%;
 
 height:40px;
 width:255px;
-margin-top:6%;
+margin-top:9%;
 outline:none;
 border:none;
+border:3px solid #F77545;
+border-radius:1px;
+background: white;
+font-size:1.4rem;
+color:#F77545;
 
 }
 
 #formWrap {
-	background:red;
+	/*background:red;*/
 	height:100%;
-	width:25%;
+	width:24%;
 	display: flex;
 	flex-direction: column;
 
@@ -56,18 +64,25 @@ border:none;
 
 .forLogo{
 	width:100%;
-	height:40%;
-	background: yellow;
+	height:15em;
+	background:#F77545;
 	align-self: auto ;
 }
 
+.space {
+	height:4em;
+	width:100%;
+	/*background: red;*/
+}
+
 #form {
-	background:green;
-	height:40%;
+
+	background:white;
+	height:42%;
 	width:100%;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 	flex-direction: column;
 
 }
@@ -77,8 +92,23 @@ border:none;
 	width:100%;
 	height:15%;
 	min-height:80px;
-	background:black;
+	background:#F77545;
 	align-self:flex-start;
 
+}
+
+::-webkit-input-placeholder { /* Edge */
+  color: #D1D1D1;
+  font-size:1.2em;
+  text-indent: 8px;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+s  font-size:1.2em;
+}
+
+::placeholder {
+  color: #D1D1D1;
+  font-size:1.2em;
 }
 
