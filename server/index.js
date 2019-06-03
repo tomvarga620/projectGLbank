@@ -22,14 +22,14 @@ app.post('/login',function(req,res,callback){
 	let password = req.body.password;
 
 	if(login=="" || password==""){
-	res.status(400).send("Error bad login");
+	res.status(401).send("Error bad login");
 	}
 
 	database.getLogin(login,password,function(result) {
 
 	if(result==null){
 		console.log("null test");
-		res.status(400).send("Error login account not found");
+		res.status(403).send("Error login account not found");
 	}else{
 		res.status(200).send(result);
 	}

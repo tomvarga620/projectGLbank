@@ -3,12 +3,11 @@ $(document).ready(() => {
 	let userName = $("#userName");
 	let pass = $("#pass");
 	let submitBtn = $("#submitBtn");
-	let form = $("#form");
 	let error = $("#errorWrap");
 
 	submitBtn.click(() => {
-		console.log("test");
 
+		console.log("test");
 		console.log(userName.val());
 		console.log(pass.val());
 
@@ -23,7 +22,7 @@ $(document).ready(() => {
 		           console.log(xhr.status);
 
 		           if(xhr.status == 200){
-		           	form.hide();
+		           	location.href = "main.html";
 		           }
 		           
 		      },
