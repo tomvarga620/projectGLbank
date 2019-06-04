@@ -87,7 +87,7 @@ color:#AB441F;
 
 	/*background:red;*/
 	height:100%;
-	width:24%;
+	width:22em;
 	display: flex;
 	flex-direction: column;
 
@@ -169,6 +169,6 @@ margin-top:5%;
 font-size:1.2em;
 color:#E04834;
 
-
 }
+
 
