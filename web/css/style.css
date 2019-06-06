@@ -33,7 +33,7 @@ align-items: center;
 
 }
 
-.left,.right {
+.leftNav,.rightNav {
 
 height:100%;
 display:flex;
