@@ -11,6 +11,15 @@ $(document).ready(() => {
 		console.log(userName.val());
 		console.log(pass.val());
 
+		if(userName.val().trim()==null || userName.val().trim()==""|| userName.val() ===" "){
+			 error.empty();
+		     error.append('<p id="errorText">Username field is empty</p>');
+		}else if(pass.val().trim()==null || pass.val().trim()==""|| pass.val() ===" "){
+			 error.empty();
+		     error.append('<p id="errorText">Password field is empty</p>');
+		}
+		else{
+		error.empty();
 		 $.ajax({
 		      type: "POST",
 		      contentType: "application/json; charset=utf-8",
@@ -22,6 +31,8 @@ $(document).ready(() => {
 		           console.log(xhr.status);
 
 		           if(xhr.status == 200){
+		           	sessionStorage.setItem("logUser", result);
+		           	console.log(result);
 		           	location.href = "main.html";
 		           }
 		           
@@ -42,5 +53,6 @@ $(document).ready(() => {
 
 		      }	
 		 });
+		 }
 	});
 });
