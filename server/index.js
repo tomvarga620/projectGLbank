@@ -70,18 +70,16 @@ app.post('/userinfo',function(req,res){
 app.post('/accounts',function(req,res){
 
 	let login = req.body.login;
-	let id=req.body.id;
 	let token = req.body.token;
 
 	//res.status(200).send();
-	database.getAccounts(login,id,token,function(result){
+	database.getAccounts(login,token,function(result){
 		if(result==null){
 			res.status(400).send("Wrong credentials");
 		}else{
 			res.status(200).send(result);
 		}
 	});
-
 });
 
 //funguje

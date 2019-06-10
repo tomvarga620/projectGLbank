@@ -69,7 +69,7 @@ const getUserInfo = (login,token,callback) => {
 
 	con.connect(function(err){
 		if(err) throw err 
-		let sql = "select client.fname,client.lname,client.email from client inner join loginclient on loginclient.id = client.id where login like'"+login+"';";
+		let sql = "select client.fname,client.lname,client.email from client inner join loginclient on loginclient.idc = client.id where login like'"+login+"';";
 		console.log("It works");
 		con.query(sql,(err,result) => {	 
 		if(err) throw err; 
@@ -95,7 +95,7 @@ const getUserInfo = (login,token,callback) => {
 }
 
 
-const getAccounts = (login,id,token,callback) => {
+const getAccounts = (login,token,callback) => {
 	const con = mysql.createConnection({
 
 	host: "itsovy.sk",
@@ -108,7 +108,7 @@ const getAccounts = (login,id,token,callback) => {
 
 	con.connect(function(err){
 		if(err) throw err 
-		let sql = "select AccNum from account where idc like'"+id+"';";
+		let sql = "SELECT AccNum from account INNER JOIN client on client.id=account.idc inner join loginclient on client.id=loginclient.idc where login like '"+login+"';";
 		console.log("It works");
 		con.query(sql,(err,result) => {	 
 		if(err) throw err; 
