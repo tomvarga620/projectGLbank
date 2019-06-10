@@ -5,6 +5,7 @@ console.log(logUser);
 
 let login = logUser.login;
 let token = logUser.token;
+let headingBox = $(".headingBox");
 
 console.log(`${login} ${token}`);
 
@@ -20,6 +21,10 @@ $.ajax({
 
 		        if(xhr.status == 200){
 		        	console.log(result);
+		        	let rslt = JSON.parse(result);
+		        	console.log(rslt);
+
+		        	fillUserInfo(rslt.FirstName,rslt.LastName,rslt.Mail,headingBox);
 		         }  
 		    },
 		    error: function (xhr, textStatus, errorThrown) { 
@@ -34,3 +39,9 @@ $.ajax({
 	});	
 
 });
+
+const fillUserInfo = (fname,lname,mail,wrapper) => {
+	wrapper.append("<span class='headingText'>"+fname+"</span>");
+	wrapper.append("<span class='headingText'>"+lname+"</span>");
+	wrapper.append("<span class='headingText'>"+mail+"</span>");
+}
