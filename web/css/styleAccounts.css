@@ -70,3 +70,74 @@ margin-top:6%;
 margin-left:5%;
 
 }
+
+.balanceWrapper {
+
+/*background:red;*/
+width:100%;
+height:9em;	
+
+}
+
+.left {
+height:100%;
+width:60%;
+float:left;
+display:flex;
+justify-content: flex-start;
+}
+
+.balance {
+
+align-self:flex-end;
+margin-left:1em;
+margin-bottom:1em;
+
+}
+
+.balanceHeading {
+
+font-size: 20px;
+
+color: #B0B0B0;
+
+}
+
+.money {
+
+font-size: 35px;
+
+color: #06C547;
+
+}
+
+.right{
+height:100%;
+width:40%;
+float:right;
+display:flex;
+justify-content: flex-end;
+}
+
+.payment{
+
+margin:0;
+align-self:flex-end;
+outline:none;
+border:none;
+border:3px solid #F77545;
+border-radius:1px;
+background: white;
+font-size:1.4rem;
+color:#F77545;
+-webkit-transition: border 0.5s ease, color 0.5s ease; /* For Safari 3.1 to 6.0 */
+transition: border 0.5s ease,color 0.5s ease;
+
+}
+
+.payment:hover {
+
+border:3px solid #AB441F;
+color:#AB441F;
+
+}
