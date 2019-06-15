@@ -6,7 +6,7 @@ console.log(logUser);
 let login = logUser.login;
 let token = logUser.token;
 let headingBox = $(".headingBox");
-let changePass = $('.changePass'); 
+let changePass = $('#changePass'); 
 
 console.log(`${login} ${token}`);
 
@@ -46,9 +46,27 @@ const fillUserInfo = (fname,lname,mail,wrapper) => {
 	wrapper.append("<div class='headingText'><span class='greyText'>E-mail: </span>"+mail+"</div>");
 }
 
-
+/*
 changePass.click(() => {
 	console.log("test change pass");
-});
+});*/
+
+let modalPass = document.getElementById('modalPass');
+let span = document.getElementsByClassName("close")[0];
+
+changePass.onclick = function() {
+	console.log("test");
+    $(modalPass).fadeIn("fast");
+}
+
+span.onclick = function() {
+    $(modalPass).fadeOut("fast");
+}
+
+window.onclick = function(event) {
+	if (event.target == modalPass) {
+        $(modalPass).fadeOut("fast");
+    }
+}
 
 });
