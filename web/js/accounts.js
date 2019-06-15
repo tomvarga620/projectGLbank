@@ -20,7 +20,7 @@ $(document).ready(() => {
 		           if(xhr.status == 200){
 		           	console.log(result);
 		           	let rslt = JSON.parse(result);
-		           	generateAccounts(rslt);
+		            generateAccounts(rslt);
 		           }
 		           
 		      },
@@ -39,7 +39,7 @@ $(document).ready(() => {
 		for(let i=0;i<arr.length;i++){
 			let mainWrapper = $('.mainWrapper');
 			//mainWrapper.append("<div class='accWrapper'><div class='headingBox'><span class='headingText'>Account number: "+arr[i].AccNum+"</span></div></div>");
-			mainWrapper.append("<div class='accWrapper'><div class='headingBox'><span class='headingText'>Account number:"+arr[i].AccNum+"</span></div><div class='balanceWrapper'><div class='left'><div class='balance'><span class='balanceHeading'>Current Balance:</span><br><span class='money'>"+arr[i].Amount+"</span></div></div><div class='right'><input type='button' value='payment' class='payment'></div></div></div></div>");
+			mainWrapper.append("<div class='accWrapper'><div class='headingBox'><span class='headingText'>Account number: "+arr[i].AccNum+"</span></div><div class='balanceWrapper'><div class='left'><div class='balance'><span class='balanceHeading'>Current Balance:</span><br><span class='money'>"+arr[i].Amount+"</span></div></div><div class='right'><input type='button' value='payment' class='payment'></div></div></div></div>");
 		}
 	}
 });
