@@ -41,7 +41,7 @@ $.ajax({
 });
 
 const fillUserInfo = (fname,lname,mail,wrapper) => {
-	wrapper.append("<span class='headingText'>"+fname+"</span>");
-	wrapper.append("<span class='headingText'>"+lname+"</span>");
-	wrapper.append("<span class='headingText'>"+mail+"</span>");
+	wrapper.append("<span class='headingText'><span class='greyText'>First Name: </span>"+fname+"</span>");
+	wrapper.append("<span class='headingText'><span class='greyText'>Surname: </span>"+lname+"</span>");
+	wrapper.append("<span class='headingText'><span class='greyText'>E-mail: </span>"+mail+"</span>");
 }
