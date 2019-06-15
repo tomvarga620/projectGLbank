@@ -6,6 +6,7 @@ console.log(logUser);
 let login = logUser.login;
 let token = logUser.token;
 let headingBox = $(".headingBox");
+let changePass = $('.changePass'); 
 
 console.log(`${login} ${token}`);
 
@@ -36,12 +37,18 @@ $.ajax({
 		    }
 
 		}	
-	});	
+});	
 
-});
 
 const fillUserInfo = (fname,lname,mail,wrapper) => {
 	wrapper.append("<div class='headingText'><span class='greyText'>First Name: </span>"+fname+"</div>");
 	wrapper.append("<div class='headingText'><span class='greyText'>Surname: </span>"+lname+"</div>");
 	wrapper.append("<div class='headingText'><span class='greyText'>E-mail: </span>"+mail+"</div>");
 }
+
+
+changePass.click(() => {
+	console.log("test change pass");
+});
+
+});
