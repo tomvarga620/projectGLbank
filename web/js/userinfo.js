@@ -6,7 +6,7 @@ console.log(logUser);
 let login = logUser.login;
 let token = logUser.token;
 let headingBox = $(".headingBox");
-let changePass = $('#changePass'); 
+//let changePass = $('#changePass'); 
 
 console.log(`${login} ${token}`);
 
@@ -51,11 +51,11 @@ changePass.click(() => {
 	console.log("test change pass");
 });*/
 
-let modalPass = document.getElementById('modalPass');
+let modalPass = document.getElementById('passModal');
+let changePass = document.getElementById("changePass");
 let span = document.getElementsByClassName("close")[0];
 
 changePass.onclick = function() {
-	console.log("test");
     $(modalPass).fadeIn("fast");
 }
 
@@ -64,9 +64,10 @@ span.onclick = function() {
 }
 
 window.onclick = function(event) {
-	if (event.target == modalPass) {
+    if (event.target == modalPass) {
         $(modalPass).fadeOut("fast");
     }
+
 }
 
 });
