@@ -170,7 +170,7 @@ cursor: pointer;
 
 }
 
-.repassword,.newpassword {
+.oldpassword,.newpassword {
 
 height:30px;
 width:250px;
@@ -184,7 +184,7 @@ text-indent: 4px;
 
 }
 
-.repassword:focus,.newpassword:focus {
+.oldpassword:focus,.newpassword:focus {
 
 border:2.5px solid #2CC779;
 

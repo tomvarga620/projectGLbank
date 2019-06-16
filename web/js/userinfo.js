@@ -70,4 +70,57 @@ window.onclick = function(event) {
 
 }
 
+
+let oldPass = $('.oldpassword');
+let newPass = $('.newpassword');
+let submitPass = $('#submitPass');
+let error = $("#errorWrap");
+
+submitPass.click(() => {
+
+		console.log("test submit pass");
+
+		if(oldPass.val().trim()==null || oldPass.val().trim()==""|| oldPass.val() ===" "){
+			 error.empty();
+		     error.append('<p id="errorText">Old passwordfield is empty</p>');
+		}else if(newPass.val().trim()==null || newPass.val().trim()==""|| newPass.val() ===" "){
+			 error.empty();
+		     error.append('<p id="errorText">New Password field is empty</p>');
+		}
+		else{
+		error.empty();
+		 $.ajax({
+		      type: "POST",
+		      contentType: "application/json; charset=utf-8",
+		      url: "http://localhost:3000/changePassword ",
+		      data: "{\"login\":\""+login+"\",\"token\":\""+token+"\",\"oldpassword\":\""+oldPass.val()+"\",\"newpassword\":\""+newPass.val()+"\"}",
+		      success: function (result,textStatus,xhr) {
+		           console.log("it works");
+		           console.log(textStatus);
+		           console.log(xhr.status);
+
+		           if(xhr.status == 200){
+		           	console.log("password is changed");
+		           	oldPass.val("");
+		           	newPass.val("");
+		           	$(modalPass).fadeOut("fast");
+		           }
+		           
+		      },
+		      error: function (xhr, textStatus, errorThrown) { 
+		      	console.log(xhr.status);
+		      	console.log(textStatus);
+
+		      	if(xhr.status == 400){
+		      		oldPass.val("");
+		           	newPass.val("");
+		      		error.empty();
+		      		error.append('<p id="errorText">Error wrong credentials</p>');
+		      	}
+
+		      }	
+		 });
+		}
+	});
+
 });
