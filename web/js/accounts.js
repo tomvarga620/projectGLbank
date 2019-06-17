@@ -42,4 +42,10 @@ $(document).ready(() => {
 			mainWrapper.append("<div class='accWrapper'><div class='headingBox'><span class='headingText'><span class='greyText'>Account number: </span>"+arr[i].AccNum+"</span></div><div class='balanceWrapper'><div class='left'><div class='balance'><span class='balanceHeading'>Current Balance:</span><br><span class='money'>"+arr[i].Amount+" €"+"</span></div></div><div class='right'><input type='button' value='Payment' class='payment'></div></div></div></div>");
 		}
 	}
+
+
+	$('.mainWrapper').delegate('div.accWrapper', 'click', function() {
+		console.log($(this).text());
+	});
+
 });

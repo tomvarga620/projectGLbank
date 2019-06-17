@@ -82,7 +82,7 @@ submitPass.click(() => {
 
 		if(oldPass.val().trim()==null || oldPass.val().trim()==""|| oldPass.val() ===" "){
 			 error.empty();
-		     error.append('<p id="errorText">Old passwordfield is empty</p>');
+		     error.append('<p id="errorText">Old password field is empty</p>');
 		}else if(newPass.val().trim()==null || newPass.val().trim()==""|| newPass.val() ===" "){
 			 error.empty();
 		     error.append('<p id="errorText">New Password field is empty</p>');

@@ -3,11 +3,45 @@ $(document).ready(() => {
 let logout = $(".logout");
 let logUser = JSON.parse(sessionStorage.getItem("logUser"));
 console.log(logUser);
+console.log("all keys = "+Object.keys(sessionStorage));
 
 let login = logUser.login;
 let token = logUser.token;
 
 console.log(`${login} ${token}`);
+
+if(sessionStorage['accNum']){
+	//let accNum = JSON.parse(sessionStorage.getItem("accNum"));
+	$.ajax({
+		      type: "POST",
+		      contentType: "application/json; charset=utf-8",
+		      url: "http://localhost:3000/logout",
+		      data: "{\"login\":\""+login+"\",\"token\":\""+token+"\",\"accNum\":\""+accNum+"\"}",
+		      success: function (result,textStatus,xhr) {
+		           console.log("it works");
+		           console.log(textStatus);
+		           console.log(xhr.status);
+
+		           if(xhr.status == 200){
+		           	sessionStorage.clear();
+		           	location.href = "index.html";
+		           }
+		           
+		      },
+		      error: function (xhr, textStatus, errorThrown) { 
+		      	console.log(xhr.status);
+		      	console.log(textStatus);
+
+		      	if(xhr.status == 401){
+		      		console.log(`Wrong credentials`);
+		      	}
+
+		      }	
+	});	
+}
+else{
+	return null;
+}
 
 logout.click(() => {
 	console.log("logout test");
