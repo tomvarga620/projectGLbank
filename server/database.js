@@ -108,7 +108,7 @@ const getAccounts = (login,token,callback) => {
 
 	con.connect(function(err){
 		if(err) throw err 
-		let sql = "SELECT AccNum from account INNER JOIN client on client.id=account.idc inner join loginclient on client.id=loginclient.idc where login like '"+login+"';";
+		let sql = "SELECT AccNum,Amount from account INNER JOIN client on client.id=account.idc inner join loginclient on client.id=loginclient.idc where login like '"+login+"';";
 		console.log("It works");
 		con.query(sql,(err,result) => {	 
 		if(err) throw err; 
@@ -410,15 +410,17 @@ const getChangePass = (login,token,oldpassword,newpassword,callback) => {
 			let sql = "update loginclient set password = md5('"+newpassword+"') where login like '"+login+"' and password like md5('"+oldpassword+"');";
 			con.query(sql,(err,result) => {	 
 			if(err) throw err; 
-				if(result.length==0){
-					console.log("Account is not in the database");
+				if(result.affectedRows == 0){
+					console.log("Bad old password");
 					let rslt = null;
 					callback(rslt);
 				}else{
+					console.log(result.affectedRows);
 					console.log("Account is in the database");
 					let newresult = JSON.stringify("Password is changed");
 					console.log(newresult);
 					callback(newresult);
+
 				}
 			});
 		});

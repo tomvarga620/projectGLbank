@@ -202,7 +202,7 @@ app.post('/changepassword',function(req,res){
 	database.getChangePass(login,token,oldpassword,newpassword,function(result){
 
 		if(result==null){
-			res.status(400).send("Wrong credentials");
+			res.status(400).send("Bad Old Password");
 		}else{
 			res.status(200).send(result);
 		}

@@ -104,6 +104,7 @@ submitPass.click(() => {
 		           	oldPass.val("");
 		           	newPass.val("");
 		           	$(modalPass).fadeOut("fast");
+		           	console.log(result);
 		           }
 		           
 		      },
@@ -115,7 +116,7 @@ submitPass.click(() => {
 		      		oldPass.val("");
 		           	newPass.val("");
 		      		error.empty();
-		      		error.append('<p id="errorText">Error wrong credentials</p>');
+		      		error.append('<p id="errorText">Error wrong old password</p>');
 		      	}
 
 		      }	
