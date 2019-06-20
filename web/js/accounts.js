@@ -39,13 +39,27 @@ $(document).ready(() => {
 		for(let i=0;i<arr.length;i++){
 			let mainWrapper = $('.mainWrapper');
 			//mainWrapper.append("<div class='accWrapper'><div class='headingBox'><span class='headingText'>Account number: "+arr[i].AccNum+"</span></div></div>");
-			mainWrapper.append("<div class='accWrapper'><div class='headingBox'><span class='headingText'><span class='greyText'>Account number: </span>"+arr[i].AccNum+"</span></div><div class='balanceWrapper'><div class='left'><div class='balance'><span class='balanceHeading'>Current Balance:</span><br><span class='money'>"+arr[i].Amount+" €"+"</span></div></div><div class='right'><input type='button' value='Payment' class='payment'></div></div></div></div>");
+			mainWrapper.append("<div class='accWrapper'><div class='headingBox'><span class='headingText'><span class='greyText'>Account number: </span>"+arr[i].AccNum+"</span></div><div class='balanceWrapper'><div class='left'><div class='balance'><span class='balanceHeading'>Current Balance:</span><br><span class='money'>"+arr[i].Amount+" €"+"</span></div></div><div class='right'></div></div></div></div>");
 		}
 	}
 
 
 	$('.mainWrapper').delegate('div.accWrapper', 'click', function() {
-		console.log($(this).text());
+		
+		let text = $(this).text();
+		console.log(text);
+
+		var regex = /: /;
+
+		let accNum = text.substr(text.indexOf(':'),12);
+		accNum = accNum.replace(regex,'');
+		console.log(accNum);
+	});
+
+	let paymentBtn = $('.payment');
+
+	paymentBtn.click(()=> {
+		console.log("test pica");
 	});
 
 });
