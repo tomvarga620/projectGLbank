@@ -8,6 +8,7 @@ console.log("all keys = "+Object.keys(sessionStorage));
 let login = logUser.login;
 let token = logUser.token;
 let paymentBtn = $(".payment");
+let downWrapper = $(".downWrapper");
 
 console.log(`${login} ${token}`);
 
@@ -97,5 +98,9 @@ const generateTransactions = (arr) => {
 		transWrap.append("<div class='trans'><div class='transId'>ID:<span class='value'>"+arr[i].id+"</span></div><div class='recNum'>Recipient:<span class='value'>"+arr[i].RecAccount+"</span></div><div class='amount'>"+"€ -"+arr[i].TransAmount+"</div></div>")
 	}
 }
+
+paymentBtn.click(() => {
+	downWrapper.css('display','block');
+});
 
 });
