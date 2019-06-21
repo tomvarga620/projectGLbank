@@ -252,6 +252,7 @@ color:#F77545;
 -webkit-transition: border 0.5s ease, color 0.5s ease; /* For Safari 3.1 to 6.0 */
 transition: border 0.5s ease,color 0.5s ease;
 cursor:pointer;
+display:none;
 
 }
 

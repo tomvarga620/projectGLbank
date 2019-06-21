@@ -7,6 +7,7 @@ console.log("all keys = "+Object.keys(sessionStorage));
 
 let login = logUser.login;
 let token = logUser.token;
+let paymentBtn = $(".payment");
 
 console.log(`${login} ${token}`);
 
@@ -20,8 +21,12 @@ if(sessionStorage['accNum']){
 
 	let accWrap = $(".accText");
 	let moneyWrap = $(".money");
+	let balanceWrap = $(".balanceHeading"); 
+
+	balanceWrap.text("Current Balance:");
 	accWrap.text("Account Number: "+accNum);
 	moneyWrap.text(money+" €");
+	paymentBtn.css('display','block');
 
 	$.ajax({
 		      type: "POST",
