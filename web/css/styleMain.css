@@ -117,3 +117,62 @@ font-size: 22px;
 color: #7A7A7A;
 
 }
+
+.headingBoxTrans{
+
+height:15%;
+width:100%;
+background: #FAFAFA;
+box-shadow: 0px 1.5px 4px rgba(0, 0, 0, 0.25);
+display:flex;
+justify-content: flex-start;
+align-items:center;
+text-indent: 2em;
+
+}
+
+.transactionWrap {
+
+width:100%;
+height:85%;
+overflow-y:auto; 
+overflow-x:hidden; 
+overflow: scroll;
+/*background: red;*/
+
+}
+
+.trans {
+
+width:100%;
+height:4em;
+margin-top:2em;
+background: #F3F3F3;
+display:flex;
+flex-direction: flex-start;
+align-items: center;
+justify-content: space-around;
+
+}
+
+.transId {
+height:50%;
+margin-left:2%;
+color:#A6A6A6;
+}
+
+.recNum {
+height:50%;
+color:#A6A6A6;
+}
+
+.amount {
+height:50%;
+align-items: flex-end;
+color:#7A7A7A;
+
+}
+
+.value{
+color:#7A7A7A;
+}

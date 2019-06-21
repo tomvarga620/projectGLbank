@@ -11,20 +11,27 @@ let token = logUser.token;
 console.log(`${login} ${token}`);
 
 if(sessionStorage['accNum']){
-	//let accNum = JSON.parse(sessionStorage.getItem("accNum"));
+	console.log(typeof(login));
+	console.log(typeof(token));
+	console.log(sessionStorage.getItem("accNum"));
+	let accNum = sessionStorage.getItem("accNum");
+	console.log(typeof(accNum));
+
 	$.ajax({
 		      type: "POST",
 		      contentType: "application/json; charset=utf-8",
-		      url: "http://localhost:3000/logout",
-		      data: "{\"login\":\""+login+"\",\"token\":\""+token+"\",\"accNum\":\""+accNum+"\"}",
+		      url: "http://localhost:3000/transhistory",
+		      data: "{\"login\":\""+login+"\",\"idAcc\":\""+accNum+"\",\"token\":\""+token+"\"}",
 		      success: function (result,textStatus,xhr) {
 		           console.log("it works");
 		           console.log(textStatus);
 		           console.log(xhr.status);
 
 		           if(xhr.status == 200){
-		           	sessionStorage.clear();
-		           	location.href = "index.html";
+		           	let rslt = JSON.parse(result);
+		           	console.log(rslt);
+		           	generateTransactions(rslt);
+
 		           }
 		           
 		      },
@@ -32,7 +39,7 @@ if(sessionStorage['accNum']){
 		      	console.log(xhr.status);
 		      	console.log(textStatus);
 
-		      	if(xhr.status == 401){
+		      	if(xhr.status == 400){
 		      		console.log(`Wrong credentials`);
 		      	}
 
@@ -40,7 +47,7 @@ if(sessionStorage['accNum']){
 	});	
 }
 else{
-	return null;
+	console.log("wrong accNum");
 }
 
 logout.click(() => {
@@ -72,5 +79,12 @@ logout.click(() => {
 		      }	
 		 });	
 });
+
+const generateTransactions = (arr) => {
+	for(let i=0;i<arr.length;i++){
+		let transWrap = $('.transactionWrap');
+		transWrap.append("<div class='trans'><div class='transId'>ID:"+arr[i].id+"<span class='value'></span></div><div class='recNum'>Recipient:"+arr[i].RecAccount+"<span class='value'></span></div><div class='amount'>"+arr[i].TransAmount+"</div></div>")
+	}
+}
 
 });

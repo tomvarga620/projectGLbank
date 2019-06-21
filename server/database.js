@@ -201,7 +201,7 @@ const getTransHistory = (login,idAcc,token,callback) => {
 		if(tokens[i].login==objGetted.login && tokens[i].token==objGetted.token){
 			con.connect(function(err){
 			if(err) throw err 
-			let sql = "select * from transaction where idAcc like '"+idAcc+"';";
+			let sql = "select * from transaction where RecAccount like '"+idAcc+"';";
 			con.query(sql,(err,result) => {	 
 			if(err) throw err; 
 				if(result.length==0){
@@ -210,10 +210,7 @@ const getTransHistory = (login,idAcc,token,callback) => {
 					callback(rslt);
 				}else{
 					console.log("Account is in the database");
-					let obj= new Object();
-					obj.transAmout=result[0].TransAmout;
-					obj.idcAccount=result[0].idAcc;
-					let newresult = JSON.stringify(obj);
+					let newresult = JSON.stringify(result);
 					console.log(newresult);
 					callback(newresult);
 				}
@@ -337,7 +334,7 @@ const getCardInfo = (login,idCard,token,callback) => {
 const getCardTransaction = (login,idCard,token,callback) => {
 	const con = mysql.createConnection({
 
-		host: "itsovy.sk",
+	host: "itsovy.sk",
     user: "glbank",
     password: "password",
     database: "glbank",

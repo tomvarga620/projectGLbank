@@ -54,6 +54,10 @@ $(document).ready(() => {
 		let accNum = text.substr(text.indexOf(':'),12);
 		accNum = accNum.replace(regex,'');
 		console.log(accNum);
+
+		sessionStorage.setItem("accNum", accNum);
+		location.href = "main.html";
+
 	});
 
 	let paymentBtn = $('.payment');
