@@ -83,7 +83,7 @@ logout.click(() => {
 const generateTransactions = (arr) => {
 	for(let i=0;i<arr.length;i++){
 		let transWrap = $('.transactionWrap');
-		transWrap.append("<div class='trans'><div class='transId'>ID:"+arr[i].id+"<span class='value'></span></div><div class='recNum'>Recipient:"+arr[i].RecAccount+"<span class='value'></span></div><div class='amount'>"+arr[i].TransAmount+"</div></div>")
+		transWrap.append("<div class='trans'><div class='transId'>ID:<span class='value'>"+arr[i].id+"</span></div><div class='recNum'>Recipient:<span class='value'>"+arr[i].RecAccount+"</span></div><div class='amount'>"+"€ -"+arr[i].TransAmount+"</div></div>")
 	}
 }
 
