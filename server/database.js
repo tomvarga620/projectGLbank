@@ -149,7 +149,7 @@ const getAccInfo = (login,token,accNum,callback) => {
 		if(tokens[i].login==objGetted.login && tokens[i].token==objGetted.token){
 			con.connect(function(err){
 			if(err) throw err 
-			let sql = "select * from account where AccNum like '"+accNum+"';";
+			let sql = "select id,amount from account where AccNum like '"+accNum+"';";
 			con.query(sql,(err,result) => {	 
 			if(err) throw err; 
 				if(result.length==0){
@@ -158,10 +158,7 @@ const getAccInfo = (login,token,accNum,callback) => {
 					callback(rslt);
 				}else{
 					console.log("Account is in the database");
-					let obj= new Object();
-					obj.id=result[0].id;
-					obj.amount=result[0].amount;
-					let newresult = JSON.stringify(obj);
+					let newresult = JSON.stringify(result);
 					console.log(newresult);
 					callback(newresult);
 				}
