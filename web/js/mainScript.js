@@ -17,6 +17,9 @@ if(sessionStorage['accNum']){
 	let accNum = sessionStorage.getItem("accNum");
 	console.log(typeof(accNum));
 
+	let accWrap = $(".accText");
+	accWrap.text("Account Number: "+accNum);
+
 	$.ajax({
 		      type: "POST",
 		      contentType: "application/json; charset=utf-8",
