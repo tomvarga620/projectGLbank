@@ -15,10 +15,13 @@ if(sessionStorage['accNum']){
 	console.log(typeof(token));
 	console.log(sessionStorage.getItem("accNum"));
 	let accNum = sessionStorage.getItem("accNum");
+	let money = sessionStorage.getItem("money");
 	console.log(typeof(accNum));
 
 	let accWrap = $(".accText");
+	let moneyWrap = $(".money");
 	accWrap.text("Account Number: "+accNum);
+	moneyWrap.text(money+" €");
 
 	$.ajax({
 		      type: "POST",

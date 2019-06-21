@@ -96,7 +96,7 @@ box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 
 .headingBox {
 
-height:5em;
+height:35%;
 width:100%;
 background: #FAFAFA;
 box-shadow: 0px 1.5px 4px rgba(0, 0, 0, 0.25);
@@ -188,4 +188,76 @@ color:#7A7A7A;
 
 .value{
 color:#7A7A7A;
+}
+
+.balanceWrapper{
+
+width:100%;
+height:65%;
+
+}
+
+.left {
+height:100%;
+width:60%;
+float:left;
+display:flex;
+justify-content: flex-start;
+}
+
+.balance {
+
+align-self:flex-end;
+margin-left:1em;
+margin-bottom:1em;
+
+}
+
+.balanceHeading {
+
+font-size: 20px;
+
+color: #B0B0B0;
+
+}
+
+.money {
+
+font-size: 35px;
+
+color: #06C547;
+
+}
+
+.right{
+height:100%;
+width:40%;
+float:right;
+display:flex;
+justify-content: flex-end;
+}
+
+
+.payment{
+
+margin:0;
+align-self:flex-end;
+outline:none;
+border:none;
+border:3px solid #F77545;
+border-radius:1px;
+background: white;
+font-size:1.4rem;
+color:#F77545;
+-webkit-transition: border 0.5s ease, color 0.5s ease; /* For Safari 3.1 to 6.0 */
+transition: border 0.5s ease,color 0.5s ease;
+cursor:pointer;
+
+}
+
+.payment:hover {
+
+border:3px solid #AB441F;
+color:#AB441F;
+
 }

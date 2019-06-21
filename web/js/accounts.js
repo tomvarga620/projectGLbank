@@ -50,12 +50,20 @@ $(document).ready(() => {
 		console.log(text);
 
 		var regex = /: /;
+		var regex2 = / €/;
 
 		let accNum = text.substr(text.indexOf(':'),12);
 		accNum = accNum.replace(regex,'');
 		console.log(accNum);
 
+		let text2 = text.split(':');
+		console.log(text2);
+		let money = text2[2];
+		money = money.replace(regex2,'');
+		console.log(money);
+
 		sessionStorage.setItem("accNum", accNum);
+		sessionStorage.setItem("money",money);
 		location.href = "main.html";
 
 	});
