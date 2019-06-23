@@ -229,4 +229,23 @@ app.post('/blockcard',function(req,res){
 
 });
 
+app.post('/sendcash', (req, res) => {
+
+    let login = req.body.login;
+    let idacc = req.body.idacc;
+    let token = req.body.token;
+    let recipient = req.body.recipient;
+    let amount = req.body.amount;
+
+    if (login==undefined || idacc==undefined || token==undefined ||recipient==undefined
+        || amount==undefined){
+        res.status(401).send();
+    }
+    database.sendCash(login, idacc, token, recipient, amount, function(value, status){
+        res.status(status).send(value);
+        console.log("it works");
+    });
+    
+});
+
 app.listen(3000);

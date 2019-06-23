@@ -249,7 +249,7 @@ const getCards = (login,idAcc,token,callback) => {
 		if(tokens[i].login==objGetted.login && tokens[i].token==objGetted.token){
 			con.connect(function(err){
 			if(err) throw err 
-			let sql = "select id from card where ida like'"+idAcc+"';";
+			let sql = "select id,expirem,expirey from card where ida like'"+idAcc+"';";
 			con.query(sql,(err,result) => {	 
 			if(err) throw err; 
 				if(result.length==0){
@@ -482,4 +482,63 @@ const getBlockCard = (login,token,idCard,callback) => {
 }
 
 
-module.exports = {getLogin,getLogout,getUserInfo,getAccounts,getAccInfo,getTransHistory,getCards,getCardInfo,getCardTransaction,getChangePass,getBlockCard};
+const sendCash = (login, idacc, token, recipient, amount, callback) => {
+	
+	const con = mysql.createConnection({
+
+	host: "itsovy.sk",
+    user: "glbank",
+    password: "password",
+    database: "glbank",
+    port: "3306"
+
+	});
+    
+    let sql1 = "update account set account.amount = account.amount -"+amount+" where account.id like " + idacc;
+    let sql2 = "update account set account.amount = account.amount +"+amount+" where account.accnum like '" + recipient + "'";
+    let sql3 = "insert into transaction (idacc, idemployee, recaccount, transamount) values (" + idacc +", " + null + ", " + recipient + ", " + amount + ")";
+
+    if(tokens.find(person => (person.login == login && person.token==token)))
+    {
+        con.beginTransaction(function(err) {
+            if(err) {throw err; }
+            con.query(sql1, function(err, result){
+                if (err){
+                    con.rollback(function() {
+                        throw err;
+                    });
+                }
+                con.query(sql2, function(err, result){
+                    if (err){
+                        con.rollback(function() {
+                            throw err;
+                        });
+                    }
+                });
+                    con.query(sql3, function(err, result){
+                        if (err){
+                            con.rollback(function() {
+                                throw err;
+                            });
+                        }
+                    });
+    
+                        con.commit(function(err){
+                            let mess = new Object();
+                            mess.message = "Transaction Completed";
+                            callback(200, JSON.stringify(mess));
+    
+                        });
+            });
+        });
+    }
+    else {
+        let mess=new Object;
+            mess.message="Something went wrong";
+            callback(401,JSON.stringify(mess));
+    }
+
+};
+
+
+module.exports = {getLogin,getLogout,getUserInfo,getAccounts,getAccInfo,getTransHistory,getCards,getCardInfo,getCardTransaction,getChangePass,getBlockCard,sendCash};
